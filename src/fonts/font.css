@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'Arupala Grotesk Variable';
+    src: url('ArupalaGroteskTrial-Bold.woff2') format('woff2'),
+    url('ArupalaGroteskTrial-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arupala Grotesk Variable SemBd';
+    src: url('ArupalaGroteskTrial-SemiBold.woff2') format('woff2'),
+    url('ArupalaGroteskTrial-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arupala Grotesk Variable Med';
+    src: url('ArupalaGroteskTrial-Medium.woff2') format('woff2'),
+    url('ArupalaGroteskTrial-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arupala Grotesk Variable';
+    src: url('ArupalaGroteskTrial-Regular.woff2') format('woff2'),
+    url('ArupalaGroteskTrial-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Arupala Grotesk Variable';
+    src: url('ArupalaGroteskTrial-Light.woff2') format('woff2'),
+    url('ArupalaGroteskTrial-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
