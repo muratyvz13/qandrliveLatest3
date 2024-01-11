@@ -10,6 +10,34 @@ interface Props {
 
 export const QuizResult = ({onClick,sortedUsers}:Props) => {
 
+  function manipulateString(inputString: string): string {
+    // String'in uzunluğunu kontrol et
+    if (inputString.length < 3) {
+        console.log("String en az 3 karakter içermelidir.");
+        return inputString;
+    }
+
+    // İlk 3 harfi al
+    const firstThreeChars: string = inputString.slice(0, 3);
+
+    // Son 3 harfi al
+    const lastThreeChars: string = inputString.slice(-3);
+
+    // Ortadaki karakterleri sil
+    const middleChars: string = inputString.slice(3, -3);
+
+    // Manipüle edilmiş string'i oluştur
+    const manipulatedString: string = firstThreeChars + middleChars + lastThreeChars;
+
+    // Sonucu yazdır
+    console.log("Manipüle Edilmiş String:", manipulatedString);
+
+    return manipulatedString;
+}
+
+
+
+
   const [result,setResult] = useState([
     {
       id:1,
@@ -66,8 +94,8 @@ export const QuizResult = ({onClick,sortedUsers}:Props) => {
     console.log(sortedUsers);
     const transformedResult = sortedUsers.map((user, index) => ({
       id: index + 1,
-      title: user.username,
-      point: `${user.score} $`,
+      title: user.username.slice(0, 5)+"..."+user.username.slice(-5),
+      point: `${user.score} `,
     }));
   
     setResult(transformedResult);

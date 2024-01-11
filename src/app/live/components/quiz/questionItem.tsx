@@ -23,7 +23,7 @@ export const QuestionItem = ({ title, total = 0, type, onClick, isOpen = false, 
    <Group spacing={5}>
      <Image src={'/img/profile-icon.png'} width={15} height={15} fit={"contain"} style={{marginTop:-1.2}}/>
        <Text fz={14} fw={500} color={"#fff"} className={"rubik-regular"}>
-         {total}</Text>
+         {"%"}{total}</Text>
    </Group>
     }
   </UnstyledButton>);

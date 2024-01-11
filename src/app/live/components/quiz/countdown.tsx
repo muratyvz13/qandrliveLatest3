@@ -2,6 +2,7 @@ import { Center, Grid, Image, Text } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FormButton from '../../../../lib/components/Form/button';
+import { Button } from '@mantine/core';
 import CountDownItem from './countdownItem';
 import SponsorItem from './sponsor';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
@@ -78,7 +79,8 @@ const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
             <Text mt={25} mb={15} fz={31.86} fw={600} lh={'45px'} className={'grotesk-semibold quiz-item-title'}>
               # {quizNameState} #
             </Text>
-
+            
+            
 
             <Center mb={28}>
               <div className="reward-outline">
@@ -99,18 +101,38 @@ const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
               <CountDownItem value={countdown.minutes} title={'MINUTES'}/>
 
               <CountDownItem value={countdown.seconds} title={'SECONDS'}/>
+              
             </div>
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
+              
               {isConnected ? (
-                 <FormButton title={"Join Now"} onClick={() => onClick && onClick()} />
+                <div style={{display:''}}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
+  <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => open()}>Disconnect Wallet</Button>
+  <div>
+    
+    <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{address}
+                    </Text>
+    
+  </div>
+</div>
+
+                
+                 
+                 
+                 </div>
+                 
                     ) : (
                  <FormButton title={"Connect Wallet"} onClick={() => open()} />
                   )}
 
             </div>
           </div>
+          
         </Center>
+        
       </div>
 
     </div>

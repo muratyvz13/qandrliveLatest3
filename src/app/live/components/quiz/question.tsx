@@ -294,48 +294,10 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
   }, [timer, selectedQuestion]);
 */}
 
-  const setChecked = (index: number, answer: any, reply:string) => {
-
-    if (!isSelected) {
-      const arr = [...checkedList];
-
-      if (index >= 0 && index < checkedList.length) {
-        arr[index] = answer;
-      } else {
-        arr.push(answer);
-        setIsSelected(true);
-      }
-
-      setCheckedList(arr);
-    }
-  };
-
-  const checkControl = (index: number, answer: any) => {
-
-    if (index >= 0 && index <= checkedList.length) {
-      //console.log(checkedList[index]);
-      
-      return checkedList[index] === answer;
-    }
-    return false;
-  }
 
 
-  const getCheckAnswer = (question:any,index:number) => {
 
-    if (!countdown){
-      const correctAnswer = _.findKey(question.answers, { reply: true });
-
-      if (correctAnswer){
-        return correctAnswer.toUpperCase();
-      }
-
-
-    }
-
-    return "*"
-
-  }
+ 
 
   const setButtonClicked = (buttonNumber:number) => {
     if(countDown > 0)
@@ -349,41 +311,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
 
 
 
-  const replyWrongCheck = (index: number, answer: any) => {
-
-
-    if (!countdown) {
-      const checkItem: any = checkControl(index, answer)
-      if (checkItem) {
-        console.log("answer")
-        console.log(answer)
-        console.log("answer")
-        console.log(trueAnswerState)
-        //return answer === trueAnswerState
-        return !answer.reply;
-      }
-    }
-    return false;
-  }
-
-  const correctCheck = (index: number, answer: any) => {
-
-    if (!countdown && isSelected) {
-      const checkItem: any = checkControl(index, answer);
-      
-      if (checkItem) {
-        console.log("answer")
-        console.log(answer)
-        console.log("answer")
-        console.log(trueAnswerState)
-        return answer.reply
-      }
-
-    }
-
-    return false;
-
-  };
+  
 
 
 
@@ -400,11 +328,13 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
           onClick={(index) => onClick && onClick(index)}
           rightComponent={
             <Group spacing={10} className={"right-statistic"}>
+              {/*
               <div className={"box-item"}>
                 <Text fz={14.6} mt={-1} fw={700} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
                   {`${timer.minutes}:${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds}`}
                 </Text>
               </div>
+          */}
               <div className={"box-item"} style={{ borderColor: '#000' }}>
                 <Text fz={14.6} mt={-1} fw={700} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
                 {Number(currentQuestionIndex) + 1} / {totalQuestionNumber}
@@ -435,11 +365,12 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
           }}
 
     >
+     
 
           
            
-            
-              <SwiperSlide key={`question-${1}`}>
+            {/* <SwiperSlide key={`question-${1}`}> */}
+              
                 {waitingState === 0 &&
                   <div className={"question-slide"}>
                     <div className={"question-view-box"}>
@@ -528,7 +459,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                   <Image src={'/img/banner-image.png'} className={"banner-image"}/>
                 }
 
-              </SwiperSlide>
+{/* </SwiperSlide> */}
             
         
 
