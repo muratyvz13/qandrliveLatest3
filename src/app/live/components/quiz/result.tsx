@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import QuizHeader from './header';
 import {Text} from "@mantine/core";
+import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
+import { add } from 'lodash';
 
 interface Props {
   onClick: (index: number) => void;
   sortedUsers:{username:string;score:number;time:number;rank:number;imageSrc:string}[];
+  walletAddress:string | undefined;
 }
 
 
-export const QuizResult = ({onClick,sortedUsers}:Props) => {
-
+export const QuizResult = ({onClick,sortedUsers,walletAddress}:Props) => {
+  const { address, chainId, isConnected } = useWeb3ModalAccount()
   function manipulateString(inputString: string): string {
     // String'in uzunluğunu kontrol et
     if (inputString.length < 3) {
@@ -94,7 +97,7 @@ export const QuizResult = ({onClick,sortedUsers}:Props) => {
     console.log(sortedUsers);
     const transformedResult = sortedUsers.map((user, index) => ({
       id: index + 1,
-      title: user.username.slice(0, 5)+"..."+user.username.slice(-5),
+      title: user.username.slice(0, 5)+"..."+user.username.slice(-6),
       point: `${user.score} `,
     }));
   
@@ -107,7 +110,9 @@ export const QuizResult = ({onClick,sortedUsers}:Props) => {
       <div className={"quiz-area"}>
         <div className={"profile-header"}>
           <QuizHeader title={"RESULTS 🔥"} onClick={(index) => onClick && onClick(index)}/>
-
+          <div style={{display:"flex",justifyContent:"center",textAlign:"center",marginTop:"10px"}}>
+          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{address?.slice(0, 5)+"..."+address?.slice(-6)}</Text>
+          </div>
           <div className={"result-quiz-box"}>
             <div className={"result-quiz-box-top"}>
               <Text fz={12} mr={45} className={"grotesk-regular rank-title"} color={"#000"} lts={-0.3} fw={400}>RANK</Text>
@@ -122,7 +127,8 @@ export const QuizResult = ({onClick,sortedUsers}:Props) => {
               {result.map((item,index) => (
                 <div className={`result-quiz-box-item item-${index+1}`}>
                   <div className={"badge-result"}>{index+1}</div>
-                  <Text style={{flex:1}} className={"title"} fz={9} color={"#000"} fw={300} lts={-0.7}>{item.title}</Text>
+                  <Text style={{flex:1,color: item.title === `${address?.slice(0, 5)}...${address?.slice(-6)}` ? "#ff0000" : "#000",
+    }} className={"title"} fz={9} color={"#000"} fw={300} lts={-0.7}>{item.title}</Text>
                   <Text className={"title"} fz={9} color={"#000"} fw={300} lts={-0.7}>{item.point}</Text>
 
                 </div>

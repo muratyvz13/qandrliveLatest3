@@ -17,6 +17,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   
   const { open } = useWeb3Modal()
   const { address, chainId, isConnected } = useWeb3ModalAccount()
+  const [walletAddress,setWalletAddress]=useState("");
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useState("");
   const [quizName, setQuizName] = useState("tuNNcay Quiz");
@@ -75,6 +76,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   
   useEffect(() => {
     
+  
     if(trueAnswer!=="")
     {
       if(userAnswer == "A")
@@ -107,8 +109,10 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
   
   useEffect(() => {
+    
     //checkMetamaskConnectionn();
     if (address !== undefined) {
+      setWalletAddress(address);
       console.log(address);
     socket.emit("setParams", { username: address});
     

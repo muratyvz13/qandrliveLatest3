@@ -9,6 +9,7 @@ import SponsorItem from './sponsor';
 import { wait } from '@testing-library/user-event/dist/utils';
 
 interface QuizProps {
+  walletAddress?:string | undefined;
   countDown: number;
   waiting: number;
   currentQuestion: string;
@@ -24,9 +25,10 @@ interface QuizProps {
   setClickedIndexState: React.Dispatch<React.SetStateAction<number>>;
   setUserAnswer:React.Dispatch<React.SetStateAction<string>>;
   setUserAnswerTime: React.Dispatch<React.SetStateAction<number>>;
+
   // Diğer prop tipleri
 }
-export const Quiz: React.FunctionComponent<QuizProps> = ({ countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime}) => {
+export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime}) => {
 
   const sponsorImage = {
     src: `/img/sponsor-2.png`,
@@ -98,6 +100,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({ countDown,waiting,cur
                 setStep(index);
               }}
               sortedUsers={sortedUsers}
+              walletAddress={walletAddress}
               />
             }
 
