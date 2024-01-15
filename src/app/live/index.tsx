@@ -20,7 +20,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [walletAddress,setWalletAddress]=useState("");
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useState("");
-  const [quizName, setQuizName] = useState("tuNNcay Quiz");
+  const [quizName, setQuizName] = useState("Digiverse Live Quiz");
   const [options, setOptions] = useState(["1", "2", "3", "4"]);
   const [trueAnswer, setTrueAnswer] = useState("");
   const [userAnswer, setUserAnswer] = useState(""); 
@@ -297,7 +297,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
 
 
-    <Quiz setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
+    <Quiz walletAddress={walletAddress} setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
  
     <Reward/>
     

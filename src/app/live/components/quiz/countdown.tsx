@@ -15,18 +15,41 @@ interface Props {
 
 
 const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
-  const initialCountdown = {
-    days: 1,
-    hours: 6,
-    minutes: 29,
-    seconds: 48,
-  };
+  
+  
+  
+function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, minutes: number, seconds: number } {
+  const differenceInMilliseconds = targetDate.getTime() - now.getTime();
 
+  const hours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60));
+  const minutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
 
+  return { hours, minutes, seconds };
+}
+
+const now: Date = new Date();
+
+// Aynı günün 20:00'ine ayarlanmış tarih ve saat
+const eveningTargetDate: Date = new Date();
+eveningTargetDate.setHours(20, 0, 0, 0);
+
+// Farkı hesapla ve yazdır
+const timeDifference = calculateTimeDifference(now, eveningTargetDate);
+
+const initialCountdown = {
+  days: 0,
+  hours: timeDifference.hours,
+  minutes: timeDifference.minutes,
+  seconds: timeDifference.seconds,
+};
   const { open } = useWeb3Modal()
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   const [countdown, setCountdown] = useState(initialCountdown);
   const [quizNameState, setQuizNameState] = useState(quizName);
+
+ 
+  
 
   useEffect(() => {
     setQuizNameState(quizName);
@@ -87,7 +110,7 @@ const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
                 <div>
                   <Text fz={10} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>REWARD
                     PRIZE</Text>
-                  <Text fw={700} color={"#000"} fz={14} className={"grotesk-bold"} lts={-0.42} lh={"14px"}>50
+                  <Text fw={700} color={"#000"} fz={14} className={"grotesk-bold"} lts={-0.42} lh={"14px"}>100
                     USDT</Text>
                 </div>
               </div>

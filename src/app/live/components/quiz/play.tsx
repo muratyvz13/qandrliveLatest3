@@ -15,10 +15,30 @@ interface Props {
 
 const QuizPlay: React.FC<Props> = ({onClick}:Props) => {
 
+  function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, minutes: number, seconds: number } {
+    const differenceInMilliseconds = targetDate.getTime() - now.getTime();
+  
+    const hours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60));
+    const minutes = Math.floor((differenceInMilliseconds % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((differenceInMilliseconds % (1000 * 60)) / 1000);
+  
+    return { hours, minutes, seconds };
+  }
+  
+  const now: Date = new Date();
+  
+  // Aynı günün 20:00'ine ayarlanmış tarih ve saat
+  const eveningTargetDate: Date = new Date();
+  eveningTargetDate.setHours(20, 0, 0, 0);
+  
+  // Farkı hesapla ve yazdır
+  const timeDifference = calculateTimeDifference(now, eveningTargetDate);
+  
+  
   const [countdown, setCountdown] = useState<Countdown>({
-    hours: 3,
-    minutes: 33,
-    seconds: 10,
+    hours: timeDifference.hours,
+    minutes: timeDifference.minutes,
+    seconds: timeDifference.seconds,
   });
 
 
