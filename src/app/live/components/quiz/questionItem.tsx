@@ -9,63 +9,23 @@ interface Props {
   correctAnswer?: boolean;
   onClick: () => void;
   small?: boolean;
-  style?: object;
-  total: number;
-  isOpen?: boolean;
+  style?:object;
+  total:number;
+  isOpen?:boolean
+
 }
 
-export const QuestionItem = ({
-  title, 
-  total = 0, 
-  type, 
-  onClick, 
-  isOpen = false, 
-  wrongAnswer = false, 
-  correctAnswer = false, 
-  checked = false, 
-  small = false,
-  style = {}
-}: Props) => {
-  const textStyle = small ? { lineHeight: '1' } : { lineHeight: '1' };
+export const QuestionItem = ({ title, total = 0, type, onClick, isOpen = false, wrongAnswer = false, correctAnswer = false, checked = false, small = false,style = {} }: Props) => {
+  return (<UnstyledButton style={style} className={`answer-item ${checked ? 'checked-answer' : ''} ${small ? 'small-item' : ''} ${wrongAnswer ? 'wrong-answer' : ''} ${correctAnswer ? 'correct-answer' : ''}`} onClick={() => onClick()}>
+    <Text style={{ lineHeight: '1',flex: 1 }} className={"title"} fw={700} fz={small ? 25 : 28}>{type}: {"1"}</Text>
 
-  return (
-    <UnstyledButton 
-      style={style} 
-      className={`answer-item ${checked ? 'checked-answer' : ''} ${small ? 'small-item' : ''} 
-                  ${wrongAnswer ? 'wrong-answer' : ''} ${correctAnswer ? 'correct-answer' : ''}`} 
-      onClick={() => onClick()}
-    >
-      <Text 
-        style={{ ...textStyle, flex: 1 }} 
-        className="title" 
-        fw={700} 
-        fz={small ? 25 : 28}
-      >
-        {type}: {type}
-      </Text>
-
-      {isOpen && (
-        <Group spacing={5}>
-          <Image 
-            src={'/img/profile-icon.png'} 
-            width={15} 
-            height={15} 
-            fit="contain" 
-            style={{marginTop:-1.2}}
-          />
-          <Text 
-            style={textStyle}
-            fz={14} 
-            fw={500} 
-            color="#fff" 
-            className="rubik-regular"
-          >
-            {"%"}{total}
-          </Text>
-        </Group>
-      )}
-    </UnstyledButton>
-  );
+    {isOpen &&
+   <Group spacing={5}>
+     <Image src={'/img/profile-icon.png'} width={15} height={15} fit={"contain"} style={{marginTop:-1.2}}/>
+       <Text fz={14} fw={500} color={"#fff"} className={"rubik-regular"}>
+         {"%"}{total}</Text>
+   </Group>
+    }
+  </UnstyledButton>);
 }
-
 export default QuestionItem;
