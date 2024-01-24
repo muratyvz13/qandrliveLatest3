@@ -41,7 +41,7 @@ export const QuestionItem = ({
         fw={700} 
         fz={small ? 25 : 28}
       >
-        {type}: {"titlejj\n titlejjtitlejj"+"\n titlejj"+"titlejj"}
+        {type}: {"1"}
       </Text>
 
       {isOpen && (
