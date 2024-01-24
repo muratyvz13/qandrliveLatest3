@@ -373,7 +373,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
            
             {/* <SwiperSlide key={`question-${1}`}> */}
               
-                {waitingState === 0 &&
+                {waitingState === 1 &&
                   <div className={"question-slide"}>
                     <div className={"question-view-box"}>
                     
@@ -457,7 +457,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                   </div>
                 }
 
-                {waitingState === 1 &&
+                {waitingState === 0 &&
                   <Image src={'/img/banner-image.png'} className={"banner-image"}/>
                 }
 
