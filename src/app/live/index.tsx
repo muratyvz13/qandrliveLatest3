@@ -20,7 +20,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [walletAddress,setWalletAddress]=useState("");
   const [username, setUsername] = useState("");
   const [question, setQuestion] = useState("");
-  const [quizName, setQuizName] = useState("Digiverse Live Quiz");
+  const [quizName, setQuizName] = useState("GT Protocol Live Quiz");
   const [options, setOptions] = useState(["1", "2", "3", "4"]);
   const [trueAnswer, setTrueAnswer] = useState("");
   const [userAnswer, setUserAnswer] = useState(""); 
