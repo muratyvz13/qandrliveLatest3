@@ -41,7 +41,7 @@ export const QuestionItem = ({
         fw={700} 
         fz={small ? 25 : 28}
       >
-        {type}: {"1"}
+        {type}: {type}
       </Text>
 
       {isOpen && (
