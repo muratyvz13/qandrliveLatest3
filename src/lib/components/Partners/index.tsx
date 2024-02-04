@@ -52,6 +52,22 @@ export const Partners = () => {
         width:271,
         height:88.78
       }
+    },
+    {
+      title: 'AiTech',
+      img: {
+        src: 'ref-7.png',
+        width:271,
+        height:88.78
+      }
+    },
+    {
+      title: 'ChainGpt',
+      img: {
+        src: 'ref-8.png',
+        width:271,
+        height:88.78
+      }
     }
   ]);
 
