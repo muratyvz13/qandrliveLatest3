@@ -35,6 +35,16 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDow
     width: 172,
     height: 56
   }
+  const sponsorImage1 = {
+    src: `/img/ref-7.png`,
+    width: 172,
+    height: 56
+  }
+  const sponsorImage2 = {
+    src: `/img/ref-8.png`,
+    width: 172,
+    height: 56
+  }
 
   const [step, setStep] = useState(0);
 
@@ -115,18 +125,16 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDow
 
 
             <Grid mt={36}>
-              <Grid.Col lg={3}>
+              <Grid.Col lg={4}>
                 <SponsorItem image={sponsorImage}/>
               </Grid.Col>
-              <Grid.Col lg={3}>
-                <SponsorItem image={sponsorImage}/>
+              <Grid.Col lg={4}>
+                <SponsorItem image={sponsorImage1}/>
               </Grid.Col>
-              <Grid.Col lg={3}>
-                <SponsorItem image={sponsorImage}/>
+              <Grid.Col lg={4}>
+                <SponsorItem image={sponsorImage2}/>
               </Grid.Col>
-              <Grid.Col lg={3}>
-                <SponsorItem image={sponsorImage}/>
-              </Grid.Col>
+              
             </Grid>
           </div>
         </div>
