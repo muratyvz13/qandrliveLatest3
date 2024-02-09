@@ -29,7 +29,7 @@ const QuizPlay: React.FC<Props> = ({onClick}:Props) => {
   
   // Aynı günün 20:00'ine ayarlanmış tarih ve saat
   const eveningTargetDate: Date = new Date();
-  eveningTargetDate.setHours(21, 0, 0, 0);
+  eveningTargetDate.setHours(20, 0, 0, 0);
   
   // Farkı hesapla ve yazdır
   const timeDifference = calculateTimeDifference(now, eveningTargetDate);

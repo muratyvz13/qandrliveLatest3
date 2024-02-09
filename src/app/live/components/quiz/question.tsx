@@ -441,6 +441,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                         />
                       </Grid.Col>
                       <Grid.Col md={6}>
+                      
                         <QuestionItem wrongAnswer={clickedButtonIndex === 4 && trueAnswerState!=="D" && countdown<=0} total={optionsCountsState[3].votes}
                                       type={"D"} title={optionD}
                                       onClick={() => {
