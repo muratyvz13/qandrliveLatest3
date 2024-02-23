@@ -32,7 +32,7 @@ const now: Date = new Date();
 
 // Aynı günün 20:00'ine ayarlanmış tarih ve saat
 const eveningTargetDate: Date = new Date();
-eveningTargetDate.setHours(18, 0, 0, 0);
+eveningTargetDate.setHours(20, 45, 0, 0);
 
 // Farkı hesapla ve yazdır
 const timeDifference = calculateTimeDifference(now, eveningTargetDate);
