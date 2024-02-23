@@ -459,7 +459,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                 }
 
                 {waitingState === 1 &&
-                  <Image src={'/img/banner-image.png'} className={"banner-image"}/>
+                  <Image src={'/img/advertalt.png'} className={"banner-image"}/>
                 }
 
 {/* </SwiperSlide> */}
