@@ -7,17 +7,38 @@ import CountDownItem from './countdownItem';
 import SponsorItem from './sponsor';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 import { ethers } from 'ethers'
+import { GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
 };
+const clientId = "43295896312-4ilu3i6jqlbuh44ct3fmpbf1n57p6jhp.apps.googleusercontent.com";
+
 
 
 
 const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
   
+  const [user, setUser] = useState<GoogleLoginResponse | null>(null);
   
-  
+  const onSuccess = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if ('profileObj' in response) {
+      setUser(response);
+      // Kullanıcı bilgileri state'e kaydedildi
+    }
+  };
+
+  const onFailure = (error: any) => {
+    console.error('Giriş Başarısız:', error);
+  };
+
+  const onLogoutSuccess = () => {
+    setUser(null);
+    // Kullanıcı çıkış yaptı, state'i sıfırla
+  };  
+
+
 function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, minutes: number, seconds: number } {
   const differenceInMilliseconds = targetDate.getTime() - now.getTime();
 
@@ -91,7 +112,7 @@ const initialCountdown = {
       <div className={"quiz-area"}>
         <Center>
           <div className={"w-quiz-answer-w100"} style={{ textAlign: 'center' }}>
-
+       
             <Center mt={35}>
               <Link to={'/'}>
                 <Image src={'/img/logo.png'} width={54.54} height={54.54} fit={'contain'}/>
@@ -115,7 +136,24 @@ const initialCountdown = {
                 </div>
               </div>
             </Center>
-
+            {user ? (
+        <div>
+          <div>{user.profileObj.email}</div> {/* Kullanıcının e-mail adresini göster */}
+          <GoogleLogout
+            clientId={clientId}
+            buttonText="Logout"
+            onLogoutSuccess={onLogoutSuccess}
+          />
+        </div>
+      ) : (
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Login with Gmail"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={'single_host_origin'}
+        />
+      )}
             <div className={'center-item-days'}>
               <CountDownItem value={countdown.days} title={'DAYS'}/>
 

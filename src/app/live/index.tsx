@@ -110,7 +110,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   
   useEffect(() => {
     
-    //checkMetamaskConnectionn();
+    //checkMetamaskConnect*ionn();
     if (address !== undefined) {
       setWalletAddress(address);
       console.log(address);

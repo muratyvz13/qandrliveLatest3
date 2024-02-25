@@ -13,7 +13,7 @@ import Content from "./lib/components/Content"
 import { store } from "./store";
 
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
-
+import { GoogleOAuthProvider } from '@react-oauth/google';
 // 1. Get projectId
 const projectId = '5e7d9af89e3d6e55686814bde64fc394'
 
@@ -46,6 +46,7 @@ function App() {
   return (
 
     <Provider store={store}>
+      <GoogleOAuthProvider clientId="43295896312-4ilu3i6jqlbuh44ct3fmpbf1n57p6jhp.apps.googleusercontent.com">
       <MantineProvider  withGlobalStyles withNormalizeCSS  theme={{
         components: {
           Container: {
@@ -71,6 +72,7 @@ function App() {
           </Content>
         </ModalsProvider>
       </MantineProvider>
+      </GoogleOAuthProvider>,
     </Provider>
 
 
