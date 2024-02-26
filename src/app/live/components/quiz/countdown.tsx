@@ -136,24 +136,7 @@ const initialCountdown = {
                 </div>
               </div>
             </Center>
-            {user ? (
-        <div>
-          <div>{user.profileObj.email}</div> {/* Kullanıcının e-mail adresini göster */}
-          <GoogleLogout
-            clientId={clientId}
-            buttonText="Logout"
-            onLogoutSuccess={onLogoutSuccess}
-          />
-        </div>
-      ) : (
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Login with Gmail"
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy={'single_host_origin'}
-        />
-      )}
+      
             <div className={'center-item-days'}>
               <CountDownItem value={countdown.days} title={'DAYS'}/>
 
