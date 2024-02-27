@@ -7,36 +7,20 @@ import CountDownItem from './countdownItem';
 import SponsorItem from './sponsor';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 import { ethers } from 'ethers'
-import { GoogleLogin, GoogleLogout, GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { auth, googleAuthProvider } from '../../../../firebase-config';
+import { GoogleAuthProvider } from 'firebase/auth';
 
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
 };
-const clientId = "43295896312-4ilu3i6jqlbuh44ct3fmpbf1n57p6jhp.apps.googleusercontent.com";
-
 
 
 
 const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
   
-  const [user, setUser] = useState<GoogleLoginResponse | null>(null);
-  
-  const onSuccess = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    if ('profileObj' in response) {
-      setUser(response);
-      // Kullanıcı bilgileri state'e kaydedildi
-    }
-  };
+  const googleAuthProvider = new GoogleAuthProvider();
 
-  const onFailure = (error: any) => {
-    console.error('Giriş Başarısız:', error);
-  };
-
-  const onLogoutSuccess = () => {
-    setUser(null);
-    // Kullanıcı çıkış yaptı, state'i sıfırla
-  };  
 
 
 function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, minutes: number, seconds: number } {
@@ -136,7 +120,7 @@ const initialCountdown = {
                 </div>
               </div>
             </Center>
-      
+          
             <div className={'center-item-days'}>
               <CountDownItem value={countdown.days} title={'DAYS'}/>
 
