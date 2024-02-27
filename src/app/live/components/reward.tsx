@@ -7,7 +7,7 @@ export const Reward = () => {
         <Text mb={5} fz={36} lh={"53px"} style={{ letterSpacing: -1 }} className={"grotesk-medium reward-title"} fw={500}
               ta={"center"}>REWARD POOL:</Text>
         <div className={"box-reward"}>
-          <Text fw={700} fz={64} lh={"64px"} className={"grotesk-bold usd-title"} color={"#000"}>100 USD</Text>
+          <Text fw={700} fz={64} lh={"64px"} className={"grotesk-bold usd-title"} color={"#000"}>30 USD</Text>
         </div>
       </div>
     </Center>
