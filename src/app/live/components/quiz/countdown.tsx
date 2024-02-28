@@ -123,13 +123,9 @@ const initialCountdown = {
           
             <div className={'center-item-days'}>
               <CountDownItem value={countdown.days} title={'DAYS'}/>
-
               <CountDownItem value={countdown.hours} title={'HOURS'}/>
-
               <CountDownItem value={countdown.minutes} title={'MINUTES'}/>
-
               <CountDownItem value={countdown.seconds} title={'SECONDS'}/>
-              
             </div>
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
@@ -146,10 +142,7 @@ const initialCountdown = {
     
   </div>
 </div>
-
-                
-                 
-                 
+        
                  </div>
                  
                     ) : (

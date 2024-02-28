@@ -327,16 +327,19 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
           title={quizNameState}
           onClick={(index) => onClick && onClick(index)}
           rightComponent={
-            <Group spacing={10} className={"right-statistic"}>
-              {/*
-              <div className={"box-item"}>
-                <Text fz={14.6} mt={-1} fw={700} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
-                  {`${timer.minutes}:${timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds}`}
+            <Group spacing={20} className={"right-statistic"}>
+              
+              {
+                
+              <div className={"box-item"}  style={{ borderColor: '#000',padding:"6px",width:"80px",height:"50px" }}>
+                 <Image src={'/img/timer.png'} width={30} height={30} fit={"contain"} style={{marginTop:-1.2}}/>
+                <Text fz={26.6} mt={-1} fw={800} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
+                  {countdown}
                 </Text>
               </div>
-          */}
-              <div className={"box-item"} style={{ borderColor: '#000' }}>
-                <Text fz={14.6} mt={-1} fw={700} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
+          }
+              <div className={"box-item"} style={{ borderColor: '#000',padding:"0px",width:"120px",height:"50px" }}>
+                <Text fz={26.6} mt={-1} fw={800} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>
                 {Number(currentQuestionIndex) + 1} / {totalQuestionNumber}
                 </Text>
               </div>
@@ -368,9 +371,6 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
 
     >
      
-
-          
-           
             {/* <SwiperSlide key={`question-${1}`}> */}
               
                 {waitingState === 0 &&
@@ -378,18 +378,30 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                     <div className={"question-view-box"}>
                     
                       <Group>
+                        {/*
                         <div className="ques-min-box">
+                          
                           <div>
                             <Text className={"title grotesk-bold"}>Countdown</Text>
                             <Text className={"min-text grotesk-bold"}>{countdown}</Text>
                           </div>
+                         
                         </div>
-                        <div className="ques-min-box">
-                          <div>
-                            <Text className={"title grotesk-bold"}>Answer</Text>
-                            <Text className={"min-text grotesk-bold"}>{trueAnswerState}</Text>
-                          </div>
-                        </div>
+                         */}
+                       {trueAnswerState !== "*" && (
+      <div style={{ display: "flex", margin: "auto" }}>
+         
+        <div className="ques-min-box" style={{width:"90px",height:"45px"}}>
+        <Image src={'/img/true.png'}  width={40} height={40} fit={"contain"}/>
+          <div>
+         
+            <Text className={"min-text grotesk-bold"} style={{fontSize:"18px",fontWeight:"bold"}}>{trueAnswerState}</Text>
+          </div>
+         
+        </div>
+        
+      </div>
+    )}
                       </Group>
 
                       <Text ta={"center"} className={"main-question-title"} fz={16} fw={600} color={"#000"}
@@ -441,7 +453,6 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
                         />
                       </Grid.Col>
                       <Grid.Col md={6}>
-                      
                         <QuestionItem wrongAnswer={clickedButtonIndex === 4 && trueAnswerState!=="D" && countdown<=0} total={optionsCountsState[3].votes}
                                       type={"D"} title={optionD}
                                       onClick={() => {

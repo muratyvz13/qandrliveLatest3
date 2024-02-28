@@ -16,8 +16,8 @@ interface Props {
 }
 
 export const QuestionItem = ({ title, total = 0, type, onClick, isOpen = false, wrongAnswer = false, correctAnswer = false, checked = false, small = false,style = {} }: Props) => {
-  return (<UnstyledButton style={style} className={`answer-item ${checked ? 'checked-answer' : ''} ${small ? 'small-item' : ''} ${wrongAnswer ? 'wrong-answer' : ''} ${correctAnswer ? 'correct-answer' : ''}`} onClick={() => onClick()}>
-    <Text style={{ lineHeight: '1',flex: 1 }} className={"title"} fw={700} fz={small ? 25 : 28}>{type}: {title}</Text>
+  return (<UnstyledButton style={{height:"68px"}} className={`answer-item ${checked ? 'checked-answer' : ''} ${small ? 'small-item' : ''} ${wrongAnswer ? 'wrong-answer' : ''} ${correctAnswer ? 'correct-answer' : ''}`} onClick={() => onClick()}>
+    <Text style={{ lineHeight: '1',flex: 1,fontSize:"17px" }} className={"title"} fw={700} fz={small ? 25 : 28}>{type}: {title}</Text>
 
     {isOpen &&
    <Group spacing={5}>

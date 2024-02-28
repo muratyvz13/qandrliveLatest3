@@ -162,8 +162,8 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
   socket.on("options", (options) => {
 
-    let optionsArray = String(options).split(",");
-    setOptions([optionsArray[0], optionsArray[1], optionsArray[2], optionsArray[3]]);
+    //let optionsArray = String(options).split(",");
+    setOptions([options[0], options[1], options[2], options[3]]);
   });
 
   socket.on("answer", (answer) => {
