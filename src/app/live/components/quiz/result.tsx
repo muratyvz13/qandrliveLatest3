@@ -98,7 +98,9 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
     console.log(sortedUsers);
     const transformedResult = sortedUsers.map((user, index) => ({
       id: index + 1,
-      title: user.username.slice(0, 5)+"..."+user.username.slice(-6),
+      title: user.username.startsWith("0x") 
+         ? user.username.slice(0, 5) + "..." + user.username.slice(-6) 
+         : user.username,
       point: `${user.score} `,
     }));
   
@@ -112,7 +114,15 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
         <div className={"profile-header"}>
           <QuizHeader title={"RESULTS 🔥"} onClick={(index) => onClick && onClick(index)}/>
           <div style={{display:"flex",justifyContent:"center",textAlign:"center",marginTop:"10px"}}>
-          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{address?.slice(0, 5)+"..."+address?.slice(-6) && walletAddress!== ""}{userMail && userMail!== ""}</Text>
+          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{
+  walletAddress && walletAddress !== "" && userMail == "" && (
+    <div>{address?.slice(0, 5)+"..."+address?.slice(-6)}</div>
+  )
+}{
+  userMail && userMail !== "" && (
+    <div>{userMail}</div>
+  )
+}</Text>
           </div>
           <div className={"result-quiz-box"}>
             <div className={"result-quiz-box-top"}>
