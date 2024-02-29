@@ -7,7 +7,7 @@ import CountDownItem from './countdownItem';
 import SponsorItem from './sponsor';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 import { ethers } from 'ethers'
-import { auth, googleAuthProvider } from '../../../../firebase-config';
+import { signInWithGooglePopup,auth } from "../../../../firebase-config"
 import { GoogleAuthProvider } from 'firebase/auth';
 
 interface Props {
@@ -19,7 +19,10 @@ interface Props {
 
 const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
   
-  const googleAuthProvider = new GoogleAuthProvider();
+  const logGoogleUser = async () => {
+    const response = await signInWithGooglePopup();
+    console.log(response);
+}
 
 
 
@@ -37,7 +40,7 @@ const now: Date = new Date();
 
 // Aynı günün 20:00'ine ayarlanmış tarih ve saat
 const eveningTargetDate: Date = new Date();
-eveningTargetDate.setHours(22, 30, 0, 0);
+eveningTargetDate.setHours(22, 0, 0, 0);
 
 // Farkı hesapla ve yazdır
 const timeDifference = calculateTimeDifference(now, eveningTargetDate);
@@ -91,6 +94,28 @@ const initialCountdown = {
     return () => clearInterval(interval);
   }, [onClick]);
 
+  const [userMail, setUserMail] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Kullanıcının giriş durumunu dinle
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        // Kullanıcı giriş yapmış
+        console.log(user.email);
+        setUserMail(user.email);
+        
+      
+      } else {
+        // Kullanıcı giriş yapmamış
+        setUserMail("");
+       
+      }
+    });
+
+    // Cleanup function
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div>
       <div className={"quiz-area"}>
@@ -108,7 +133,9 @@ const initialCountdown = {
               # {quizNameState} #
             </Text>
             
+            <div>
             
+        </div>
 
             <Center mb={28}>
               <div className="reward-outline">
@@ -146,6 +173,7 @@ const initialCountdown = {
                  </div>
                  
                     ) : (
+                      
                  <FormButton title={"Connect Wallet"} onClick={() => open()} />
                   )}
 

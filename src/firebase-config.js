@@ -1,20 +1,25 @@
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 const firebaseConfig = {
-  apiKey: "API_KEY",
-  authDomain: "PROJECT_ID.firebaseapp.com",
-  projectId: "PROJECT_ID",
-  storageBucket: "PROJECT_ID.appspot.com",
-  messagingSenderId: "SENDER_ID",
-  appId: "APP_ID",
+  apiKey: "AIzaSyCsYYIsu92cj3tGMmiAyatWdSQhIQoPt9I",
+  authDomain: "loginmail-54606.firebaseapp.com",
+  projectId: "loginmail-54606",
+  storageBucket: "loginmail-54606.appspot.com",
+  messagingSenderId: "789404863348",
+  appId: "1:789404863348:web:9472103267c9dbebd9fa21",
+  measurementId: "G-V4EPS7W6J4"
 };
 
-// Firebase app'i başlat
-const app = initializeApp(firebaseConfig);
-
-// Authentication servisini al
-export const auth = getAuth(app);
-export const googleAuthProvider = new GoogleAuthProvider();
+// Initialize Firebase
+const firebaseApp = initializeApp(firebaseConfig);
+// Initialize Firebase Auth provider
+const provider = new GoogleAuthProvider();
+  
+// whenever a user interacts with the provider, we force them to select an account
+provider.setCustomParameters({   
+    prompt : "select_account "
+});
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
