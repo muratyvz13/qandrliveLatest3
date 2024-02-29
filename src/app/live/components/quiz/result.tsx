@@ -8,10 +8,11 @@ interface Props {
   onClick: (index: number) => void;
   sortedUsers:{username:string;score:number;time:number;rank:number;imageSrc:string}[];
   walletAddress:string | undefined;
+  userMail:string | undefined;
 }
 
 
-export const QuizResult = ({onClick,sortedUsers,walletAddress}:Props) => {
+export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) => {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   function manipulateString(inputString: string): string {
     // String'in uzunluğunu kontrol et
@@ -111,7 +112,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress}:Props) => {
         <div className={"profile-header"}>
           <QuizHeader title={"RESULTS 🔥"} onClick={(index) => onClick && onClick(index)}/>
           <div style={{display:"flex",justifyContent:"center",textAlign:"center",marginTop:"10px"}}>
-          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{address?.slice(0, 5)+"..."+address?.slice(-6)}</Text>
+          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{address?.slice(0, 5)+"..."+address?.slice(-6) && walletAddress!== ""}{userMail && userMail!== ""}</Text>
           </div>
           <div className={"result-quiz-box"}>
             <div className={"result-quiz-box-top"}>

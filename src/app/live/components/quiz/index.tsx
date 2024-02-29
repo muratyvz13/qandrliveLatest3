@@ -118,6 +118,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
               }}
               sortedUsers={sortedUsers}
               walletAddress={walletAddress}
+              userMail={userMail}
               />
             }
 
