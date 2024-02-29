@@ -10,6 +10,7 @@ import { wait } from '@testing-library/user-event/dist/utils';
 
 interface QuizProps {
   walletAddress?:string | undefined;
+  userMail?:string | undefined;
   countDown: number;
   waiting: number;
   currentQuestion: string;
@@ -25,10 +26,10 @@ interface QuizProps {
   setClickedIndexState: React.Dispatch<React.SetStateAction<number>>;
   setUserAnswer:React.Dispatch<React.SetStateAction<string>>;
   setUserAnswerTime: React.Dispatch<React.SetStateAction<number>>;
-
+  setUserMail:React.Dispatch<React.SetStateAction<string>>;
   // Diğer prop tipleri
 }
-export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime}) => {
+export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime,setUserMail}) => {
 
   const sponsorImage = {
     src: `/img/sponsor-2.png`,
@@ -88,7 +89,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDow
         <div className={"fullscreen"}>
           <div className={"zoom-screen"}>
             {step === 1 &&
-              <QuizCountDown onClick={() => updateQuiz()} quizName={quizName}/>
+              <QuizCountDown onClick={() => updateQuiz()} quizName={quizName} userMail={userMail} setUserMail={setUserMail} />
             }
             {step === 2 &&
               <QuizQuestion onClick={(index: number) => {
@@ -107,6 +108,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({walletAddress,countDow
               setClickedIndexState={setClickedIndexState}
               setUserAnswer={setUserAnswer}
               setUserAnswerTime={setUserAnswerTime}
+              userMail={userMail}
               />
             }
 

@@ -14,6 +14,7 @@ interface Props {
   countDown: number; // countDown prop'u eklendi
   waiting:number;
   currentQuestion: string;
+  userMail?:string | undefined;
   trueAnswer:string;
   userAnswer:String;
   options: string[];
@@ -35,7 +36,7 @@ interface CheckProps {
 
 
 
-const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts, setClickedIndexState,setUserAnswer,setUserAnswerTime}: Props) => {
+const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts, setClickedIndexState,setUserAnswer,setUserAnswerTime}: Props) => {
   const swiperRef = useRef<SwiperProps>();
 
   const [checkedList, setCheckedList] = useState<Array<any>>([]);
@@ -471,7 +472,7 @@ const QuizQuestion: React.FC<Props> = ({ onClick, countDown,waiting,currentQuest
 
                 {waitingState === 1 &&
 
-                  
+                 
         <Image src={'/img/banner-image.png'} className={"banner-image"} />
       
                 }

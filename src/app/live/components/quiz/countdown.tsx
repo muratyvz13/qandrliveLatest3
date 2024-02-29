@@ -8,22 +8,35 @@ import SponsorItem from './sponsor';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 import { ethers } from 'ethers'
 import { signInWithGooglePopup,auth } from "../../../../firebase-config"
-import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider,signOut } from 'firebase/auth';
+import { FaGoogle } from 'react-icons/fa';
 
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
+  userMail?:string | undefined;
+  setUserMail:React.Dispatch<React.SetStateAction<string>>;
 };
 
 
 
-const QuizCountDown: React.FC<Props> = ({ onClick,quizName }: Props) => {
+const QuizCountDown: React.FC<Props> = ({ onClick,quizName,userMail,setUserMail}: Props) => {
   
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup();
-    console.log(response);
+    
 }
-
+const logout = async () => {
+  
+  try {
+    await signOut(auth);
+ 
+    
+    console.log('Çıkış yapıldı');
+  } catch (error) {
+    console.error('Çıkış yapılırken bir hata oluştu', error);
+  }
+};
 
 
 function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, minutes: number, seconds: number } {
@@ -94,15 +107,15 @@ const initialCountdown = {
     return () => clearInterval(interval);
   }, [onClick]);
 
-  const [userMail, setUserMail] = useState<string | null>(null);
+ 
 
   useEffect(() => {
     // Kullanıcının giriş durumunu dinle
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         // Kullanıcı giriş yapmış
-        console.log(user.email);
-        setUserMail(user.email);
+       
+        setUserMail(user.email ?? "");
         
       
       } else {
@@ -156,9 +169,26 @@ const initialCountdown = {
             </div>
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
-              
-              {isConnected ? (
-                <div style={{display:''}}>
+              {/* || userMail !=="" */}
+              {isConnected || userMail !=="" ? ( 
+                <>
+                {userMail !== "" ? (
+                  <div style={{display:''}}>
+                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
+    <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => logout()}>Log Out</Button>
+    <div>
+      
+      <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{userMail}
+                      </Text>
+      
+    </div>
+  </div>
+          
+                   </div>
+                ) : (
+                 
+                  <div style={{display:''}}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
   <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
   <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => open()}>Disconnect Wallet</Button>
@@ -171,10 +201,19 @@ const initialCountdown = {
 </div>
         
                  </div>
+                )
+                }
+                
                  
-                    ) : (
-                      
+                 </>) : (
+                      <div>
+                        
+                       
+                        
                  <FormButton title={"Connect Wallet"} onClick={() => open()} />
+                 <FormButton title={"Login gmail"} onClick={() => logGoogleUser()} />
+                 
+                 </div>
                   )}
 
             </div>

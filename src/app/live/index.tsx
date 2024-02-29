@@ -31,7 +31,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [isWaiting, setIsWaiting] = useState(1);
   const [isGameOver, setIsGameOver] = useState(0);
   const [clickedIndexState, setClickedIndexState] = useState(0);
-
+  const [userMail, setUserMail] = useState("");
   const [sortedUsers, setSortedUsers] = useState([
     { username: 'A',score:10,time: 0 ,rank:10,imageSrc: '/i'}
     // Eklemek istediğiniz diğer adaylar
@@ -111,10 +111,18 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   useEffect(() => {
     
     //checkMetamaskConnect*ionn();
-    if (address !== undefined) {
+    if (address !== undefined ||  userMail !== "") {
+      if (address !== undefined ) {
       setWalletAddress(address);
-      console.log(address);
-    socket.emit("setParams", { username: address});
+      socket.emit("setParams", { username: address});
+      }
+      if (userMail !== "" ) {
+        socket.emit("setParams", { username: userMail});
+        }
+      if (address !== undefined ) {
+        
+      }
+    
     
     socket.emit("joinRoom", "tuNNcay");
     
@@ -149,7 +157,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       { name: 'D', votes: parseInt(splittedValues[3]) }
       // Eklemek istediğiniz diğer adaylar
     ]);
-    console.log(optionsCounts);
+  
     
   });
   socket.on("quizName", (quizname) => {
@@ -183,7 +191,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     setIsGameOver(1);
 
     setSortedUsers(sortedUsers);
-    //console.log(sortedUsers);
+  
    
   });
 
@@ -191,7 +199,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     setCountDown(message);
   });
 }
-  }, [address]);
+  }, [address,userMail]);
 
   
   useDocumentTitle('Qandr Live - Live');
@@ -297,7 +305,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
 
 
-    <Quiz walletAddress={walletAddress} setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
+    <Quiz setUserMail={setUserMail} userMail={userMail} walletAddress={walletAddress}  setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
  
     <Reward/>
     
