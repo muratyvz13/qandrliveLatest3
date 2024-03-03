@@ -89,7 +89,7 @@ export const Partners = () => {
 
   return (<div id="partners">
     <Container size={1170} mt={140} mb={184} className={"partner-container"}>
-      <Title style={{ letterSpacing: '-1.92px' }} ta={"center"} mb={65} className={"grotesk-bold partner-title"} lh={"64px"} fz={64} fw={800}>PARTNERS</Title>
+      <Title style={{ letterSpacing: '-1.92px' }} ta={"center"} mb={65} className={"grotesk-bold partner-title"} lh={"64px"} fz={64} fw={800}>Partners & Backers & Sponsors</Title>
       <Grid gutter={12}>
         {data.map((item, index) => (
           <Grid.Col lg={4} span={6} key={`partner-${index}`}>
