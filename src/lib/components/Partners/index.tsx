@@ -37,9 +37,16 @@ export const Partners = () => {
         height:88.78
       }
     },
-    
     {
-      title: 'Polygon',
+      title: 'Opbnb',
+      img: {
+        src: 'ref-5.png',
+        width:271,
+        height:88.78
+      }
+    },
+    {
+      title: 'Visionarie Labs',
       img: {
         src: 'ref-6.png',
         width:271,
@@ -58,6 +65,22 @@ export const Partners = () => {
       title: 'ChainGpt',
       img: {
         src: 'ref-8.png',
+        width:271,
+        height:88.78
+      }
+    },
+    {
+      title: 'Coinvestor',
+      img: {
+        src: 'ref-9.png',
+        width:271,
+        height:88.78
+      }
+    },
+    {
+      title: 'Decubate',
+      img: {
+        src: 'ref-10.png',
         width:271,
         height:88.78
       }
