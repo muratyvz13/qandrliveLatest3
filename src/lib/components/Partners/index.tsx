@@ -37,20 +37,13 @@ export const Partners = () => {
         height:88.78
       }
     },
-    {
-      title: 'Ethereum',
-      img: {
-        src: 'ref-5.png',
-        width:271,
-        height:88.78
-      }
-    },
+    
     {
       title: 'Polygon',
       img: {
         src: 'ref-6.png',
         width:271,
-        height:88.78
+        height:120
       }
     },
     {
