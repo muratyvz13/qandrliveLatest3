@@ -21,14 +21,7 @@ export const Partners = () => {
         height:88.78
       }
     },
-    {
-      title: 'Coin Vestor',
-      img: {
-        src: 'ref-3.png',
-        width:271,
-        height:88.78
-      }
-    },
+   
     {
       title: 'Castrum Capital',
       img: {
