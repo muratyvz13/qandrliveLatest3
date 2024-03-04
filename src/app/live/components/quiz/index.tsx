@@ -82,16 +82,17 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
 
   return (<Container size={"xl"} mt={78} mb={54}>
     <div id={"quiz-screen"}>
-      {step === 0 &&
+      {step === -1 &&
         <QuizPlay onClick={() => updateQuiz()}/>
+        
       }
-      {step > 0 &&
+      {step >= 0 &&
         <div className={"fullscreen"}>
           <div className={"zoom-screen"}>
-            {step === 1 &&
+            {step === 0 &&
               <QuizCountDown onClick={() => updateQuiz()} quizName={quizName} userMail={userMail} setUserMail={setUserMail} />
             }
-            {step === 2 &&
+            {step === 1 &&
               <QuizQuestion onClick={(index: number) => {
                 setStep(index);
               }}
@@ -112,7 +113,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
               />
             }
 
-            {step === 3 &&
+            {step === 2 &&
               <QuizResult onClick={(index: number) => {
                 setStep(index);
               }}
