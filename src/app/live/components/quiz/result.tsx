@@ -100,7 +100,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
       id: index + 1,
       title: user.username.startsWith("0x") 
          ? user.username.slice(0, 5) + "..." + user.username.slice(-6) 
-         : user.username.slice(0, 3) + "..." + user.username.slice(-3),
+         : userMail?.slice(0,5 )+"..."+userMail?.slice(-8),
       point: `${user.score} `,
     }));
   
@@ -120,7 +120,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
   )
 }{
   userMail && userMail !== "" && (
-    <div>{userMail?.slice(0, 3)+"..."+userMail?.slice(-3)}</div>
+    <div>{userMail?.slice(0,5 )+"..."+userMail?.slice(-8)}</div>
   )
 }</Text>
           </div>
@@ -138,7 +138,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
               {result.map((item,index) => (
                 <div className={`result-quiz-box-item item-${index+1}`}>
                   <div className={"badge-result"}>{index+1}</div>
-                  <Text style={{flex:1,color: item.title === `${address?.slice(0, 5)}...${address?.slice(-6) || item.title ===  userMail?.slice(0, 3)+"..."+userMail?.slice(-3)}` ? "#ff0000" : "#000",
+                  <Text style={{flex:1,color: item.title === `${address?.slice(0, 5)}...${address?.slice(-6)} ` ? "#ff0000" : "#000",
     }} className={"title"} fz={9} color={"#000"} fw={300} lts={-0.7}>{item.title}</Text>
                   <Text className={"title"} fz={9} color={"#000"} fw={300} lts={-0.7}>{item.point}</Text>
 

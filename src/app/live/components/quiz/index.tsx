@@ -57,7 +57,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
   useEffect(() => {
     if(gameOver == 1)
     {
-      setStep(3);
+      setStep(2);
     }
   }, [gameOver]);
 
