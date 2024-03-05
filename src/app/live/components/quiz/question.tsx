@@ -379,7 +379,7 @@ const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,cur
                     <div className={"question-view-box"}>
                     
                       <Group>
-                        {/*
+                        {/* 
                         <div className="ques-min-box">
                           
                           <div>
