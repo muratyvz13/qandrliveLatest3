@@ -116,11 +116,11 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
           <div style={{display:"flex",justifyContent:"center",textAlign:"center",marginTop:"10px"}}>
           <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{
   walletAddress && walletAddress !== "" && userMail == "" && (
-    <div>{address?.slice(0, 5)+"..."+address?.slice(-6)}</div>
+    <div>{address}</div>
   )
 }{
   userMail && userMail !== "" && (
-    <div>{userMail?.slice(0,5 )+"..."+userMail?.slice(-8)}</div>
+    <div>{userMail}</div>
   )
 }</Text>
           </div>
