@@ -100,7 +100,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
       id: index + 1,
       title: user.username.startsWith("0x") 
          ? user.username.slice(0, 5) + "..." + user.username.slice(-6) 
-         : user.username,
+         : user.username.slice(0, 3) + "..." + user.username.slice(-3),
       point: `${user.score} `,
     }));
   
@@ -120,7 +120,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
   )
 }{
   userMail && userMail !== "" && (
-    <div>{userMail}</div>
+    <div>{userMail?.slice(0, 3)+"..."+userMail?.slice(-3)}</div>
   )
 }</Text>
           </div>
