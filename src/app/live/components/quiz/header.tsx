@@ -15,12 +15,12 @@ export const QuizHeader = ({onClick,title,rightComponent}:Props) => {
         <UnstyledButton>
           <Image src={'/img/question.svg'} w={32} height={32} fit={"contain"}/>
         </UnstyledButton>
-        {/*
+        {
         <UnstyledButton onClick={() => onClick && onClick(4)}>
           <Image src={'/img/profile.svg'} w={32} height={32} fit={"contain"}/>
         </UnstyledButton>
-        */}
-        <UnstyledButton>
+        }
+         <UnstyledButton onClick={() => onClick && onClick(1)}>
           <Image src={'/img/back.svg'} w={32} height={32} fit={"contain"}/>
         </UnstyledButton>
       </Group>

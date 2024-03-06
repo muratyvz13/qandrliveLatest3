@@ -6,7 +6,7 @@ import Reward from './components/reward';
 import Banner from "./components/banner";
 import Challenge from './components/challenge';
 import socketIOClient from "socket.io-client";
-
+import axios from 'axios';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 
 const socket = socketIOClient("https://quiz-ws-server-a25e2a4e63e7.herokuapp.com", {
@@ -38,6 +38,8 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [isGameOver, setIsGameOver] = useState(0);
   const [clickedIndexState, setClickedIndexState] = useState(0);
   const [userMail, setUserMail] = useState("");
+  const [mailcheck, setMailcheck] = useState(false);
+  const [walletcheck, setWalletcheck] = useState(false);
   const [sortedUsers, setSortedUsers] = useState([
     { username: 'A',score:10,time: 0 ,rank:10,imageSrc: '/i'}
     // Eklemek istediğiniz diğer adaylar
@@ -111,7 +113,63 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     }
   }, [trueAnswer]);
 
- 
+  const createUserWithWallet = async () => {
+    try {
+        const response = await axios.post('http://localhost:3000/register', {
+        user_walletAddress: address
+        
+      });
+      console.log('Response:', response.data);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      
+    }
+  };
+  const createUserWithMail = async () => {
+    try {
+        const response = await axios.post('http://localhost:3000/register', {
+          user_mail: userMail
+        
+      });
+      console.log('Response:', response.data);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      
+    }
+  };
+
+  const checkMail = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/check-mail', {
+        user_mail: userMail
+      });
+      console.log('Response:', response.data);
+      // Burada bir değer döndürülüyor olmalı
+      return response.data.available;
+    } catch (error) {
+      console.error('Error:', error);
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+
+  const checkWallet = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/check-wallet', {
+        user_walletAddress: address
+      });
+      console.log('Response:', response.data);
+      // Burada bir değer döndürülüyor olmalı
+      return response.data.available;
+    } catch (error) {
+      console.error('Error:', error);
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+  
 
   
   useEffect(() => {
@@ -119,11 +177,29 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     //checkMetamaskConnect*ionn();
     if (address !== undefined ||  userMail !== "") {
       if (address !== undefined ) {
-      setWalletAddress(address);
-      socket.emit("setParams", { username: address});
+        
+        setWalletAddress(address);
+        socket.emit("setParams", { username: address });
+        
+        checkWallet().then(available => {
+          if (available) {
+            createUserWithWallet();
+          } 
+        }).catch(error => {
+          console.error('Error:', error);
+          // Hata işleme
+        });
       }
       if (userMail !== "" ) {
         socket.emit("setParams", { username: userMail});
+        checkMail().then(available => {
+          if (available) {
+            createUserWithWallet();
+          } 
+        }).catch(error => {
+          console.error('Error:', error);
+          // Hata işleme
+        });
         }
       if (address !== undefined ) {
         

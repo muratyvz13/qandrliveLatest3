@@ -10,7 +10,7 @@ import { ethers } from 'ethers'
 import { signInWithGooglePopup,auth } from "../../../../firebase-config"
 import { GoogleAuthProvider,signOut } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
-
+import axios from 'axios';
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
@@ -68,9 +68,32 @@ const initialCountdown = {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   const [countdown, setCountdown] = useState(initialCountdown);
   const [quizNameState, setQuizNameState] = useState(quizName);
+  const [findUserName, setFindUserName] = useState(true);
 
- 
+  const checkUsername = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/check-username', {
+        user_mail: userMail
+      });
+      console.log('Response:', response.data);
+      // Burada bir değer döndürülüyor olmalı
+      setFindUserName(response.data);
+      console.log(findUserName);
+      return response.data.available;
+    } catch (error) {
+      console.error('Error:', error);
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
   
+  
+  useEffect(() => {
+    if(userMail !== "")
+    {
+      checkUsername();
+    }
+  }, [userMail]);
 
   useEffect(() => {
     setQuizNameState(quizName);

@@ -65,6 +65,7 @@ const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,cur
     { name: 'D', votes: 0 }
     // Eklemek istediğiniz diğer adaylar
   ]);
+  
   const [openResults, setOpenResults] = useState(false);
   
   
@@ -295,11 +296,6 @@ const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,cur
   }, [timer, selectedQuestion]);
 */}
 
-
-
-
- 
-
   const setButtonClicked = (buttonNumber:number) => {
     if(countDown > 0)
     {
@@ -307,22 +303,9 @@ const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,cur
       setClickedButtonIndex(buttonNumber);
       setUserAnswerTime(countdown);
     }
-
   }
-
-
-
-  
-
-
-
-
-
   return (
     <div className={"quiz-area"}>
-      
-     
-      
       <div className={"question-item"}>
         <QuizHeader
           title={quizNameState}
