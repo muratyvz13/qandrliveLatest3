@@ -30,7 +30,7 @@ export const Home = () => {
   const [features, setFeatures] = useState([
     {
       img: {
-        src: 'step-1.png',
+        src: 'connect.gif',
         width: 159,
         height: 163,
         style:{
@@ -44,7 +44,7 @@ export const Home = () => {
     },
     {
       img: {
-        src: 'step-2.png',
+        src: 'choose.gif',
         width: 248,
         height: 140,
         style:{
@@ -61,7 +61,7 @@ export const Home = () => {
     },
     {
       img: {
-        src: 'step-3.png',
+        src: 'collect.gif',
         width: 258,
         height: 156,
         style:{
@@ -77,7 +77,7 @@ export const Home = () => {
     },
     {
       img: {
-        src: 'step-4.png',
+        src: 'enjoy.gif',
         width: 200,
         height: 232,
         style:{

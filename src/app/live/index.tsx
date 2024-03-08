@@ -182,6 +182,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         socket.emit("setParams", { username: address });
         
         checkWallet().then(available => {
+          console.log(available);
           if (available) {
             createUserWithWallet();
           } 
@@ -192,14 +193,19 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       }
       if (userMail !== "" ) {
         socket.emit("setParams", { username: userMail});
+        console.log("mail");
         checkMail().then(available => {
+          console.log("available");
           if (available) {
-            createUserWithWallet();
+            console.log(available);
+            createUserWithMail();
+            console.log("available");
           } 
         }).catch(error => {
           console.error('Error:', error);
           // Hata işleme
         });
+        console.log("mail");
         }
       if (address !== undefined ) {
         

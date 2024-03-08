@@ -78,7 +78,9 @@ const initialCountdown = {
       console.log('Response:', response.data);
       // Burada bir değer döndürülüyor olmalı
       setFindUserName(response.data);
+      console.log("sa");
       console.log(findUserName);
+      console.log("sa");
       return response.data.available;
     } catch (error) {
       console.error('Error:', error);
