@@ -31,7 +31,7 @@ export const Home = () => {
     {
       img: {
         src: 'connect.gif',
-        width: 159,
+        width: 239,
         height: 163,
         style:{
           display:'inline-block',
@@ -45,8 +45,8 @@ export const Home = () => {
     {
       img: {
         src: 'choose.gif',
-        width: 248,
-        height: 140,
+        width: 228,
+        height: 240,
         style:{
           display:'inline-block',
           marginLeft:-35,
@@ -62,7 +62,7 @@ export const Home = () => {
     {
       img: {
         src: 'collect.gif',
-        width: 258,
+        width: 288,
         height: 156,
         style:{
           display:'inline-block',
@@ -78,7 +78,7 @@ export const Home = () => {
     {
       img: {
         src: 'enjoy.gif',
-        width: 200,
+        width: 230,
         height: 232,
         style:{
           display:'inline-block',

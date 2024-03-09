@@ -146,7 +146,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         user_mail: userMail
       });
       console.log('Response:', response.data);
-      // Burada bir değer döndürülüyor olmalı
+      // Burada bir değer döndürülüyor olmalı  
       return response.data.available;
     } catch (error) {
       console.error('Error:', error);
@@ -161,7 +161,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         user_walletAddress: address
       });
       console.log('Response:', response.data);
-      // Burada bir değer döndürülüyor olmalı
+      // Burada bir değer döndürülüyor olmalı  
       return response.data.available;
     } catch (error) {
       console.error('Error:', error);
@@ -169,7 +169,32 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       return false;
     }
   };
-  
+
+  const checkUsernameWithWallet = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/check-username-withwallet', {
+        user_walletAddress: address
+      });
+      console.log('Response:', response.data);
+      // Burada bir değer döndürülüyor olmalı  /check-username-withwallet
+      return response.data.usernameExists;
+    } catch (error) {
+      console.error('Error:', error);
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+  useEffect(() => {
+    if(walletAddress !== null || walletAddress!=="")
+    {
+
+    }
+    if(userMail !== null ||  userMail!== "")
+    {
+
+    }
+
+  }, [walletAddress,userMail]);
 
   
   useEffect(() => {
@@ -196,10 +221,11 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         console.log("mail");
         checkMail().then(available => {
           console.log("available");
+          console.log(available);
           if (available) {
             console.log(available);
             createUserWithMail();
-            console.log("available");
+            console.log("availableee");
           } 
         }).catch(error => {
           console.error('Error:', error);
