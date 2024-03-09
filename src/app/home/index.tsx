@@ -39,14 +39,14 @@ export const Home = () => {
       },
       title: 'Connect',
       subTitle: 'Connect your wallet and join game',
-      color: '#fff',
-      bgColor: '#3D39FC'
+      color: '#000',
+      bgColor: '#C2C0C0'
     },
     {
       img: {
         src: 'choose.gif',
         width: 280,
-        height: 300,
+        height: 280,
         style:{
           display:'inline-block',
           marginLeft:0,
@@ -72,7 +72,7 @@ export const Home = () => {
       title: 'Collect',
       subTitle: 'Collect points by giving the most correct answers to the questions in the fastest way possible.',
       color: '#000',
-      bgColor: '#DFFF67'
+      bgColor: '#1788E6'
 
     },
     {
@@ -88,7 +88,7 @@ export const Home = () => {
       title: 'Enjoy',
       subTitle: 'Join the leaderboard and enjoy the most profitable form of entertainment',
       color: '#000',
-      bgColor: 'transparent'
+      bgColor: '#DFFF67'
 
 
     }
