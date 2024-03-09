@@ -49,7 +49,7 @@ export const Home = () => {
         height: 240,
         style:{
           display:'inline-block',
-          marginLeft:-35,
+          marginLeft:0,
           marginTop:-10
         }
       },
