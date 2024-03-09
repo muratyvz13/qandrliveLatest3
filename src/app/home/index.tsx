@@ -31,8 +31,8 @@ export const Home = () => {
     {
       img: {
         src: 'connect.gif',
-        width: 239,
-        height: 163,
+        width: 250,
+        height: 233,
         style:{
           display:'inline-block',
         }
@@ -45,8 +45,8 @@ export const Home = () => {
     {
       img: {
         src: 'choose.gif',
-        width: 228,
-        height: 240,
+        width: 280,
+        height: 300,
         style:{
           display:'inline-block',
           marginLeft:0,
