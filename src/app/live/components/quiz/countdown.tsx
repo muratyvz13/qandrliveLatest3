@@ -289,9 +289,7 @@ const initialCountdown = {
   <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => open()}>Disconnect Wallet</Button>
   <div>
     
-    <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{address?.slice(0, 5)+"..."+address?.slice(-6)}
-  
-                    </Text>
+    
                     <br></br>
                     <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{username}
   
