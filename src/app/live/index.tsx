@@ -9,7 +9,8 @@ import socketIOClient from "socket.io-client";
 import axios from 'axios';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 
-const socket = socketIOClient("https://quiz-ws-server-a25e2a4e63e7.herokuapp.com", {
+//const socket = socketIOClient("https://quiz-ws-server-a25e2a4e63e7.herokuapp.com", {
+const socket = socketIOClient("http://localhost:8000", {
   reconnection: true,
   reconnectionDelay: 1000,
   reconnectionDelayMax: 5000,
@@ -38,12 +39,15 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [isGameOver, setIsGameOver] = useState(0);
   const [clickedIndexState, setClickedIndexState] = useState(0);
   const [userMail, setUserMail] = useState("");
+  const [checkusername, setCheckusername] = useState(true);
   const [mailcheck, setMailcheck] = useState(false);
-  const [walletcheck, setWalletcheck] = useState(false);
+  const [findUserName, setFindUserName] = useState(true);
+ 
   const [sortedUsers, setSortedUsers] = useState([
     { username: 'A',score:10,time: 0 ,rank:10,imageSrc: '/i'}
     // Eklemek istediğiniz diğer adaylar
   ]);
+  
   const [advertImage, setAdvertImage] = useState("/images/chaingptadvert.jpeg");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [totalQuestionNumber, setTotalQuestionNumber] = useState(0);
@@ -113,14 +117,66 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     }
   }, [trueAnswer]);
 
+
+  const checkUsernameMail = async () => {
+    try {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/get-username', {
+        user_mail: userMail,
+      });
+      
+      // Burada bir değer döndürülüyor olmalı
+      console.log('Response:dddza', response.data);
+      setUsername(response.data.user_username);
+      
+      return response.data.user_username;
+    } catch (error) {
+      console.error('Error:', error);
+  
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+
+  const checkUsernameWallet = async () => {
+    try {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/get-username', {
+        user_walletAddress: address,
+      });
+      
+      // Burada bir değer döndürülüyor olmalı
+      
+      setUsername(response.data.user_username);
+      
+      return response.data.user_username;
+    } catch (error) {
+      console.error('Error:', error);
+  
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+  useEffect(() => {
+    
+    if(address !== undefined   )
+    {
+      checkUsernameWallet();
+        
+    }
+    if(userMail !== null &&  userMail!== "")
+    {
+      checkUsernameMail();
+      
+    }
+
+  }, [address,userMail]);
   const createUserWithWallet = async () => {
     try {
-        const response = await axios.post('http://localhost:3000/register', {
+        const response = await axios.post('https://qandrlivebackend-jet.vercel.app/register', {
         user_walletAddress: address
         
       });
-      console.log('Response:', response.data);
       
+      setFindUserName(false);
     } catch (error) {
       console.error('Error:', error);
       
@@ -128,12 +184,12 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   };
   const createUserWithMail = async () => {
     try {
-        const response = await axios.post('http://localhost:3000/register', {
+        const response = await axios.post('https://qandrlivebackend-jet.vercel.app/register', {
           user_mail: userMail
         
       });
-      console.log('Response:', response.data);
-      
+     
+      setFindUserName(false);
     } catch (error) {
       console.error('Error:', error);
       
@@ -142,10 +198,10 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
   const checkMail = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/check-mail', {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/check-mail', {
         user_mail: userMail
       });
-      console.log('Response:', response.data);
+     
       // Burada bir değer döndürülüyor olmalı  
       return response.data.available;
     } catch (error) {
@@ -157,10 +213,10 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
   const checkWallet = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/check-wallet', {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/check-wallet', {
         user_walletAddress: address
       });
-      console.log('Response:', response.data);
+      
       // Burada bir değer döndürülüyor olmalı  
       return response.data.available;
     } catch (error) {
@@ -170,46 +226,25 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     }
   };
 
-  const checkUsernameWithWallet = async () => {
-    try {
-      const response = await axios.post('http://localhost:3000/check-username-withwallet', {
-        user_walletAddress: address
-      });
-      console.log('Response:', response.data);
-      // Burada bir değer döndürülüyor olmalı  /check-username-withwallet
-      return response.data.usernameExists;
-    } catch (error) {
-      console.error('Error:', error);
-      // Hata durumunda bir değer döndürülüyor
-      return false;
-    }
-  };
-  useEffect(() => {
-    if(walletAddress !== null || walletAddress!=="")
-    {
+ 
 
-    }
-    if(userMail !== null ||  userMail!== "")
-    {
-
-    }
-
-  }, [walletAddress,userMail]);
 
   
   useEffect(() => {
     
     //checkMetamaskConnect*ionn();
-    if (address !== undefined ||  userMail !== "") {
+    if (address !== undefined ||  userMail !== "" ) {
       if (address !== undefined ) {
         
         setWalletAddress(address);
         socket.emit("setParams", { username: address });
         
         checkWallet().then(available => {
-          console.log(available);
+          console.log(address);
           if (available) {
+            alert("za")
             createUserWithWallet();
+            
           } 
         }).catch(error => {
           console.error('Error:', error);
@@ -218,20 +253,33 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       }
       if (userMail !== "" ) {
         socket.emit("setParams", { username: userMail});
-        console.log("mail");
+       
         checkMail().then(available => {
-          console.log("available");
-          console.log(available);
+          
           if (available) {
-            console.log(available);
-            createUserWithMail();
-            console.log("availableee");
+          
+            createUserWithMail()
+            .then(response => {
+              // Promise başarıyla çözüldüğünde burası çalışır
+             
+              setCheckusername(false);
+              
+              // Başka bir işlem yapabilirsiniz, örneğin durum güncellemesi veya yönlendirme
+            })
+            .catch(error => {
+              // Promise reddedildiğinde (hata olduğunda) burası çalışır
+              console.error('Kullanıcı oluşturulurken bir hata oluştu:', error);
+              // Hata yönetimi yapabilirsiniz, örneğin kullanıcıya hata mesajı gösterebilirsiniz
+            });
+          
+            
+            
           } 
         }).catch(error => {
           console.error('Error:', error);
           // Hata işleme
         });
-        console.log("mail");
+     
         }
       if (address !== undefined ) {
         
@@ -305,6 +353,8 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     setIsGameOver(1);
 
     setSortedUsers(sortedUsers);
+    socket.disconnect();
+ 
   
    
   });
@@ -419,8 +469,8 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
 
 
-    <Quiz setUserMail={setUserMail} userMail={userMail} walletAddress={walletAddress}  setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
- 
+    <Quiz  username={username} setUsername={setUsername} findUserName={findUserName} setFindUserName={setFindUserName} setUserMail={setUserMail} userMail={userMail} walletAddress={walletAddress}  setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
+
     <Reward/>
     
     <Container size={"xl"}>

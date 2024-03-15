@@ -11,16 +11,20 @@ import { signInWithGooglePopup,auth } from "../../../../firebase-config"
 import { GoogleAuthProvider,signOut } from 'firebase/auth';
 import { FaGoogle } from 'react-icons/fa';
 import axios from 'axios';
+import { add } from 'lodash';
+import { TextInput } from '@mantine/core';
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
   userMail?:string | undefined;
   setUserMail:React.Dispatch<React.SetStateAction<string>>;
+  findUserName?:boolean | undefined;
+  setFindUserName:React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 
 
-const QuizCountDown: React.FC<Props> = ({ onClick,quizName,userMail,setUserMail}: Props) => {
+const QuizCountDown: React.FC<Props> = ({ onClick,quizName,userMail,setUserMail,findUserName,setFindUserName}: Props) => {
   
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup();
@@ -32,7 +36,7 @@ const logout = async () => {
     await signOut(auth);
  
     
-    console.log('Çıkış yapıldı');
+    
   } catch (error) {
     console.error('Çıkış yapılırken bir hata oluştu', error);
   }
@@ -68,32 +72,93 @@ const initialCountdown = {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   const [countdown, setCountdown] = useState(initialCountdown);
   const [quizNameState, setQuizNameState] = useState(quizName);
-  const [findUserName, setFindUserName] = useState(true);
+  const [usernameText, setUsernameText] = useState('');
 
-  const checkUsername = async () => {
+  const checkUsernameMail = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/check-username', {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/check-username-withmail', {
         user_mail: userMail
       });
-      console.log('Response:', response.data);
+      console.log('Response:dddza', response.data);
       // Burada bir değer döndürülüyor olmalı
-      setFindUserName(response.data);
-      console.log("sa");
-      console.log(findUserName);
-      console.log("sa");
-      return response.data.available;
+      setFindUserName(response.data.usernameExists);
+      
+      return response.data.usernameExists;
+    } catch (error) {
+      console.error('Error:', error);
+  
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+
+  const checkUsernameWallet = async () => {
+    try {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/check-username-withwallet', {
+        user_walletAddress: address
+      });
+   
+      // Burada bir değer döndürülüyor olmalı
+      setFindUserName(response.data.usernameExists);
+     
+      return response.data.usernameExists;
+    } catch (error) {
+      console.error('Error:', error);
+      console.log("za");
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+
+  const updateUsernameWithmail = async () => {
+    try {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username-by-mail', {
+        user_mail: userMail,
+        new_username: usernameText
+      });
+      setFindUserName(true);
+      return response.data;
     } catch (error) {
       console.error('Error:', error);
       // Hata durumunda bir değer döndürülüyor
       return false;
     }
   };
-  
+
+  const updateUsernameWithWallet = async () => {
+    try {
+      
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username-by-wallet', {
+        user_wallet: address,
+        new_username: usernameText
+      });
+      setFindUserName(true);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      // Hata durumunda bir değer döndürülüyor
+      return false;
+    }
+  };
+  useEffect(() => {
+    
+    if(address !== undefined   )
+    {
+      checkUsernameWallet();
+        
+    }
+    if(userMail !== null &&  userMail!== "")
+    {
+      checkUsernameMail();
+      
+    }
+
+  }, [address,userMail]);
   
   useEffect(() => {
     if(userMail !== "")
     {
-      checkUsername();
+      //checkUsername();
     }
   }, [userMail]);
 
@@ -156,6 +221,7 @@ const initialCountdown = {
 
   return (
     <div>
+     
       <div className={"quiz-area"}>
         <Center>
           <div className={"w-quiz-answer-w100"} style={{ textAlign: 'center' }}>
@@ -166,15 +232,12 @@ const initialCountdown = {
               </Link>
             </Center>
 
-
             <Text mt={25} mb={15} fz={31.86} fw={600} lh={'45px'} className={'grotesk-semibold quiz-item-title'}>
               # {quizNameState} #
             </Text>
-            
+  
             <div>
-            
         </div>
-
             <Center mb={28}>
               <div className="reward-outline">
                 <div>
@@ -185,7 +248,7 @@ const initialCountdown = {
                 </div>
               </div>
             </Center>
-          
+            
             <div className={'center-item-days'}>
               <CountDownItem value={countdown.days} title={'DAYS'}/>
               <CountDownItem value={countdown.hours} title={'HOURS'}/>
@@ -195,7 +258,7 @@ const initialCountdown = {
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
-              {isConnected || userMail !=="" ? ( 
+              {findUserName &&(isConnected || userMail !==""  ? ( 
                 <>
                 {userMail !== "" ? (
                   <div style={{display:''}}>
@@ -239,7 +302,28 @@ const initialCountdown = {
                  <FormButton title={"Login gmail"} onClick={() => logGoogleUser()} />
                  
                  </div>
-                  )}
+                  ))}
+                 {!findUserName && ( 
+                  <div>
+                  {/* Label */}
+                  <TextInput
+        label="Please enter your username"
+        placeholder="@username"
+        value={usernameText} // TextInput bileşeninin değerini durum değişkeni ile bağlayın
+        onChange={(event) => setUsernameText(event.currentTarget.value)} // Kullanıcı girişini usernameText durumuna güncelleyin
+      />
+                  <br />
+                  {/* Buton */}
+                  <FormButton title={"Save"} onClick={() => {
+    if (userMail !== "") {
+      updateUsernameWithmail();
+    } else {
+      updateUsernameWithWallet();
+    }
+  }} />
+                </div>
+                 )}
+
 
             </div>
           </div>

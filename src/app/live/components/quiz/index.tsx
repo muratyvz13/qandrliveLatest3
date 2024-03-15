@@ -27,9 +27,13 @@ interface QuizProps {
   setUserAnswer:React.Dispatch<React.SetStateAction<string>>;
   setUserAnswerTime: React.Dispatch<React.SetStateAction<number>>;
   setUserMail:React.Dispatch<React.SetStateAction<string>>;
+  findUserName?:boolean | undefined;
+  setFindUserName:React.Dispatch<React.SetStateAction<boolean>>;
+  username: string;
+  setUsername:React.Dispatch<React.SetStateAction<string>>;
   // Diğer prop tipleri
 }
-export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime,setUserMail}) => {
+export const Quiz: React.FunctionComponent<QuizProps> = ({username,setUsername,findUserName,setFindUserName,userMail,walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime,setUserMail}) => {
 
   const sponsorImage = {
     src: `/img/sponsor-2.png`,
@@ -90,7 +94,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
         <div className={"fullscreen"}>
           <div className={"zoom-screen"}>
             {step === 0 &&
-              <QuizCountDown onClick={() => updateQuiz()} quizName={quizName} userMail={userMail} setUserMail={setUserMail} />
+              <QuizCountDown onClick={() => updateQuiz()} quizName={quizName} userMail={userMail} setUserMail={setUserMail} findUserName={findUserName} setFindUserName={setFindUserName} />
             }
             {step === 1 &&
               <QuizQuestion onClick={(index: number) => {
@@ -120,6 +124,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
               sortedUsers={sortedUsers}
               walletAddress={walletAddress}
               userMail={userMail}
+              username={username}
               />
             }
 
@@ -129,6 +134,9 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({userMail,walletAddress
                 onClick={(index: number) => {
                   setStep(index);
                 }}
+                username={username}
+                setUsername={setUsername}
+                userMail={userMail}
               />
             }
 

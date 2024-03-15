@@ -1984,6 +1984,19 @@ body {
 
 
 }
+/* styles.css */
+@media (min-width: 1024px) {
+  .form-button-pc {
+    width: 120px;
+    height: 30px;
+  }
+}
+@media (max-width: 1130px) {
+  .username_input {
+    width: 50%;
+    margin: auto;
+  }
+}
 
 @media screen and (max-width: 470px){
   #quiz-screen .center-play{

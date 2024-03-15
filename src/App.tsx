@@ -14,6 +14,8 @@ import { store } from "./store";
 
 import { createWeb3Modal, defaultConfig } from '@web3modal/ethers5/react'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ReactNotifications } from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 // 1. Get projectId
 const projectId = '5e7d9af89e3d6e55686814bde64fc394'
 
@@ -62,6 +64,7 @@ function App() {
           },
         },
       }} >
+        <ReactNotifications />
         <ModalsProvider>
           <Content>
             <Routes>

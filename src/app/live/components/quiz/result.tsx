@@ -9,6 +9,7 @@ interface Props {
   sortedUsers:{username:string;score:number;time:number;rank:number;imageSrc:string}[];
   walletAddress:string | undefined;
   userMail:string | undefined;
+  username: string;
 }
 
 
