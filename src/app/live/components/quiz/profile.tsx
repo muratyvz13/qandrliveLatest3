@@ -71,10 +71,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
       const response = await axios.post('https://qandrlivebackend-jet.vercel.app/get-user-quiz-history', {
         user_id: userId, // userId state'ten veya başka bir yoldan alınmalı
       });
-      console.log(userId);
-      console.log("dd");
-      console.log(response.data);
-      console.log("dd");
+   
       setQuizHistories(response.data); // Gelen veriyi state'e kaydet
     } catch (error) {
       console.error('Error fetching quiz history:', error);
@@ -90,7 +87,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
       });
       
       // Burada bir değer döndürülüyor olmalı
-      console.log('Response:dddza', response.data);
+     
       setUsername(response.data.user_username);
       
       return response.data.user_username;
@@ -126,7 +123,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
         user_username: username,
       });
       setUserId(response.data.user_id); // Kullanıcı ID'sini state'e kaydet
-      console.log('User ID:', response.data.user_id);
+     
     } catch (error) {
       console.error('An error occurred while fetching the user ID:', error);
       setUserId('User not found');

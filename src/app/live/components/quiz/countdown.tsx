@@ -79,7 +79,7 @@ const initialCountdown = {
       const response = await axios.post('https://qandrlivebackend-jet.vercel.app/check-username-withmail', {
         user_mail: userMail
       });
-      console.log('Response:dddza', response.data);
+      
       // Burada bir değer döndürülüyor olmalı
       setFindUserName(response.data.usernameExists);
       
@@ -104,7 +104,7 @@ const initialCountdown = {
       return response.data.usernameExists;
     } catch (error) {
       console.error('Error:', error);
-      console.log("za");
+  
       // Hata durumunda bir değer döndürülüyor
       return false;
     }

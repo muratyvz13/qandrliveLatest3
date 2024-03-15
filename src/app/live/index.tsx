@@ -125,7 +125,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       });
       
       // Burada bir değer döndürülüyor olmalı
-      console.log('Response:dddza', response.data);
+      
       setUsername(response.data.user_username);
       
       return response.data.user_username;
@@ -240,9 +240,9 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         socket.emit("setParams", { username: address });
         
         checkWallet().then(available => {
-          console.log(address);
+       
           if (available) {
-            alert("za")
+           
             createUserWithWallet();
             
           } 
