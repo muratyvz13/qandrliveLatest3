@@ -118,6 +118,7 @@ const initialCountdown = {
         new_username: usernameText
       });
       setFindUserName(true);
+      checkUsernameMail();
       return response.data;
     } catch (error) {
       console.error('Error:', error);
@@ -134,6 +135,7 @@ const initialCountdown = {
         new_username: usernameText
       });
       setFindUserName(true);
+      checkUsernameWallet();
       return response.data;
     } catch (error) {
       console.error('Error:', error);
@@ -244,7 +246,7 @@ const initialCountdown = {
                 <div>
                   <Text fz={10} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>REWARD
                     PRIZE</Text>
-                  <Text fw={700} color={"#000"} fz={14} className={"grotesk-bold"} lts={-0.42} lh={"14px"}>30
+                  <Text fw={700} color={"#000"} fz={14} className={"grotesk-bold"} lts={-0.42} lh={"14px"}>100
                     USDT</Text>
                 </div>
               </div>
