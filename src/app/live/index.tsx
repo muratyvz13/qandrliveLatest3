@@ -144,7 +144,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       });
       
       // Burada bir değer döndürülüyor olmalı
-      
+     
       setUsername(response.data.user_username);
       
       return response.data.user_username;
@@ -157,7 +157,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   };
   useEffect(() => {
     
-    if(address !== undefined   )
+    if( isConnected  )
     {
       checkUsernameWallet();
         

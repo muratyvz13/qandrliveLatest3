@@ -327,6 +327,7 @@ const QuizQuestion: React.FC<Props> = ({ userMail,onClick, countDown,waiting,cur
                 {Number(currentQuestionIndex) + 1} / {totalQuestionNumber}
                 </Text>
               </div>
+              
               {/*
               <div className={"box-item"} style={{ borderColor: '#fff' }}>
                 <Text fz={14.6} mt={-1} fw={700} className={"grotesk-bold text"} color={"#000"} lts={-0.4}>

@@ -89,7 +89,7 @@ const initialCountdown = {
       return response.data.usernameExists;
     } catch (error) {
       console.error('Error:', error);
-  
+     
       // Hata durumunda bir değer döndürülüyor
       return false;
     }
@@ -107,7 +107,7 @@ const initialCountdown = {
       return response.data.usernameExists;
     } catch (error) {
       console.error('Error:', error);
-  
+
       // Hata durumunda bir değer döndürülüyor
       return false;
     }
@@ -120,7 +120,7 @@ const initialCountdown = {
         new_username: usernameText
       });
       setFindUserName(true);
-      checkUsernameMail();
+      
       return response.data;
     } catch (error) {
       console.error('Error:', error);
@@ -137,11 +137,12 @@ const initialCountdown = {
         new_username: usernameText
       });
       setFindUserName(true);
-      checkUsernameWallet();
+      
       return response.data;
     } catch (error) {
       console.error('Error:', error);
       // Hata durumunda bir değer döndürülüyor
+     
       return false;
     }
   };
@@ -157,7 +158,7 @@ const initialCountdown = {
       checkUsernameMail();
       
     }
-    if(!isConnected)
+    if(!isConnected && userMail== "")
     {
       setUsername("");
       setUsernameText("");
@@ -175,6 +176,7 @@ const initialCountdown = {
   useEffect(() => {
     setQuizNameState(quizName);
   }, [quizName]);
+  
 
   useEffect(() => {
     
@@ -269,9 +271,9 @@ const initialCountdown = {
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
-              {findUserName  &&(isConnected || userMail !=="" && username!==""  ? ( 
+              {findUserName  && ((isConnected || userMail !=="")   ? ( 
                 <>
-                {userMail !== "" ? (
+                {userMail !== ""? (
                   <div style={{display:''}}>
                   <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
     <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
