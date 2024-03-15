@@ -233,11 +233,12 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   useEffect(() => {
     
     //checkMetamaskConnect*ionn();
-    if (address !== undefined ||  userMail !== "" ) {
+    
+    if ((address !== undefined ||  userMail !== "") && username!=="" ) {
       if (address !== undefined ) {
         
         setWalletAddress(address);
-        socket.emit("setParams", { username: address });
+        
         
         checkWallet().then(available => {
        
@@ -252,7 +253,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         });
       }
       if (userMail !== "" ) {
-        socket.emit("setParams", { username: userMail});
+        
        
         checkMail().then(available => {
           
@@ -283,6 +284,11 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
         }
       if (address !== undefined ) {
         
+      }
+      
+      if(username!=="")
+      {
+        socket.emit("setParams", { username: username });
       }
     
     
@@ -363,7 +369,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
     setCountDown(message);
   });
 }
-  }, [address,userMail]);
+  }, [address,userMail,username]);
 
   
   useDocumentTitle('Qandr Live - Live');

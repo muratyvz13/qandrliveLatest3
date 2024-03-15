@@ -13,7 +13,7 @@ interface Props {
 }
 
 
-export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) => {
+export const QuizResult = ({username,onClick,sortedUsers,walletAddress,userMail}:Props) => {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   function manipulateString(inputString: string): string {
     // String'in uzunluğunu kontrol et
@@ -99,9 +99,7 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
     console.log(sortedUsers);
     const transformedResult = sortedUsers.map((user, index) => ({
       id: index + 1,
-      title: user.username.startsWith("0x") 
-         ? user.username.slice(0, 5) + "..." + user.username.slice(-6) 
-         : userMail?.slice(0,5 )+"..."+userMail?.slice(-8),
+      title: user.username,
       point: `${user.score} `,
     }));
   
@@ -114,16 +112,9 @@ export const QuizResult = ({onClick,sortedUsers,walletAddress,userMail}:Props) =
       <div className={"quiz-area"}>
         <div className={"profile-header"}>
           <QuizHeader title={"RESULTS 🔥"} onClick={(index) => onClick && onClick(index)}/>
+          
           <div style={{display:"flex",justifyContent:"center",textAlign:"center",marginTop:"10px"}}>
-          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{
-  walletAddress && walletAddress !== "" && userMail == "" && (
-    <div>{address}</div>
-  )
-}{
-  userMail && userMail !== "" && (
-    <div>{userMail}</div>
-  )
-}</Text>
+          <Text fz={12} className={"grotesk-regular"} color={"#000"} lts={-0.3} fw={400} style={{flex:1}}>{"Your Wallet:  "}{username}</Text>
           </div>
           <div className={"result-quiz-box"}>
             <div className={"result-quiz-box-top"}>

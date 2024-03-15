@@ -20,11 +20,12 @@ interface Props {
   setUserMail:React.Dispatch<React.SetStateAction<string>>;
   findUserName?:boolean | undefined;
   setFindUserName:React.Dispatch<React.SetStateAction<boolean>>;
+  username: string; // countDown prop'u eklendi
 };
 
 
 
-const QuizCountDown: React.FC<Props> = ({ onClick,quizName,userMail,setUserMail,findUserName,setFindUserName}: Props) => {
+const QuizCountDown: React.FC<Props> = ({ username,onClick,quizName,userMail,setUserMail,findUserName,setFindUserName}: Props) => {
   
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup();
@@ -255,6 +256,7 @@ const initialCountdown = {
               <CountDownItem value={countdown.minutes} title={'MINUTES'}/>
               <CountDownItem value={countdown.seconds} title={'SECONDS'}/>
             </div>
+            
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
@@ -268,6 +270,11 @@ const initialCountdown = {
     <div>
       
       <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{userMail}
+      
+                      </Text>
+                      <br></br>
+                      <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{username}
+      
                       </Text>
       
     </div>
@@ -283,7 +290,15 @@ const initialCountdown = {
   <div>
     
     <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{address?.slice(0, 5)+"..."+address?.slice(-6)}
+  
                     </Text>
+                    <br></br>
+                    <Text fz={15} fw={400} lts={-0.3} lh={"11px"} color={"#000"} className={"grotesk-regular"}>{username}
+  
+                    </Text>
+                    
+                    
+                    
     
   </div>
 </div>
