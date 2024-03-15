@@ -9,8 +9,8 @@ import socketIOClient from "socket.io-client";
 import axios from 'axios';
 import { useWeb3Modal,useWeb3ModalProvider, useWeb3ModalAccount  } from '@web3modal/ethers5/react'
 
-//const socket = socketIOClient("https://quiz-ws-server-a25e2a4e63e7.herokuapp.com", {
-const socket = socketIOClient("http://localhost:8000", {
+const socket = socketIOClient("https://quiz-ws-server-a25e2a4e63e7.herokuapp.com", {
+//const socket = socketIOClient("http://localhost:8000", {
   reconnection: true,
   reconnectionDelay: 1000,
   reconnectionDelayMax: 5000,
