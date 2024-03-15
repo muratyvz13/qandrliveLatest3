@@ -13,6 +13,7 @@ import { FaGoogle } from 'react-icons/fa';
 import axios from 'axios';
 import { add } from 'lodash';
 import { TextInput } from '@mantine/core';
+import { isAddress } from 'ethers/lib/utils';
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
@@ -21,11 +22,12 @@ interface Props {
   findUserName?:boolean | undefined;
   setFindUserName:React.Dispatch<React.SetStateAction<boolean>>;
   username: string; // countDown prop'u eklendi
+  setUsername:React.Dispatch<React.SetStateAction<string>>;
 };
 
 
 
-const QuizCountDown: React.FC<Props> = ({ username,onClick,quizName,userMail,setUserMail,findUserName,setFindUserName}: Props) => {
+const QuizCountDown: React.FC<Props> = ({ setUsername,username,onClick,quizName,userMail,setUserMail,findUserName,setFindUserName}: Props) => {
   
   const logGoogleUser = async () => {
     const response = await signInWithGooglePopup();
@@ -155,8 +157,13 @@ const initialCountdown = {
       checkUsernameMail();
       
     }
+    if(!isConnected)
+    {
+      setUsername("");
+      setUsernameText("");
+    }
 
-  }, [address,userMail]);
+  }, [address,userMail,isConnected]);
   
   useEffect(() => {
     if(userMail !== "")
@@ -262,7 +269,7 @@ const initialCountdown = {
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
-              {findUserName && username!=="" &&(isConnected || userMail !==""  ? ( 
+              {findUserName  &&(isConnected || userMail !=="" && username!==""  ? ( 
                 <>
                 {userMail !== "" ? (
                   <div style={{display:''}}>
@@ -286,7 +293,10 @@ const initialCountdown = {
                   <div style={{display:''}}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
   <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
-  <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => open()}>Disconnect Wallet</Button>
+  <Button variant="filled" color="red" style={{ marginBottom: 15 }} onClick={() => {
+    open();
+    
+  }}>Disconnect Wallet</Button>
   <div>
     
 

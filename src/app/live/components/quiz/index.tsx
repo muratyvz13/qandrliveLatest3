@@ -94,7 +94,7 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({username,setUsername,f
         <div className={"fullscreen"}>
           <div className={"zoom-screen"}>
             {step === 0 &&
-              <QuizCountDown onClick={() => updateQuiz()} username={username} quizName={quizName} userMail={userMail} setUserMail={setUserMail} findUserName={findUserName} setFindUserName={setFindUserName} />
+              <QuizCountDown onClick={() => updateQuiz()} setUsername={setUsername} username={username} quizName={quizName} userMail={userMail} setUserMail={setUserMail} findUserName={findUserName} setFindUserName={setFindUserName} />
             }
             {step === 1 &&
               <QuizQuestion onClick={(index: number) => {

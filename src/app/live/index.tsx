@@ -168,7 +168,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       
     }
 
-  }, [address,userMail]);
+  }, [address,userMail,username]);
   const createUserWithWallet = async () => {
     try {
         const response = await axios.post('https://qandrlivebackend-jet.vercel.app/register', {
