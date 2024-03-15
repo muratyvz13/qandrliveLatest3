@@ -262,7 +262,7 @@ const initialCountdown = {
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
-              {findUserName &&(isConnected || userMail !==""  ? ( 
+              {findUserName && username!=="" &&(isConnected || userMail !==""  ? ( 
                 <>
                 {userMail !== "" ? (
                   <div style={{display:''}}>
