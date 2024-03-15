@@ -327,7 +327,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
                   </div>
                 ))}
               </Group>
-{userId}
+
              </div>
            </Grid.Col>
            <Grid.Col lg={7} className={"pd-view-grid"}>
