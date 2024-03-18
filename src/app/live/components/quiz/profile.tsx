@@ -30,6 +30,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   
   const [userId, setUserId] = useState("0");
+  const [usernameText, setUsernameText] = useState("0");
   const [changeUsernames, setChangeUsernames] = useState(0);
   const [stats,setStats] = useState([
     {
@@ -63,7 +64,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
   const [quizHistories, setQuizHistories] = useState<QuizHistory[]>([]); // QuizHistory tipinde bir dizi olarak tanımla
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.currentTarget.value); // username state'ini güncelle
+    setUsernameText(event.currentTarget.value); // username state'ini güncelle
     setChangeUsernames(1); // changeUsername state'ini 1 olarak ayarla
   };
   const fetchUserQuizHistory = async () => {
@@ -108,7 +109,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
       // Burada bir değer döndürülüyor olmalı
       
       setUsername(response.data.user_username);
-      
+      setUsernameText(response.data.user_username);
       return response.data.user_username;
     } catch (error) {
       console.error('Error:', error);
@@ -134,7 +135,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
     try {
       const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username', {
         user_mail: userMail,
-        new_username:username
+        new_username:usernameText
       });
       Store.addNotification({
         title: "Succesful!",
@@ -177,7 +178,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
     try {
       const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username', {
         user_walletAddress: address,
-        new_username:username
+        new_username:usernameText
       });
       Store.addNotification({
         title: "Succesful!",
@@ -300,7 +301,7 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
         placeholder="username"
         className={"username_input"}
         
-        value={username}
+        value={usernameText}
         onChange={handleUsernameChange}  // TextInput bileşeninin değerini durum değişkeni ile bağlayın
         // Kullanıcı girişini usernameText durumuna güncelleyin
       />

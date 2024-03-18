@@ -14,6 +14,7 @@ import axios from 'axios';
 import { add } from 'lodash';
 import { TextInput } from '@mantine/core';
 import { isAddress } from 'ethers/lib/utils';
+import { Store } from 'react-notifications-component';
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
@@ -115,16 +116,28 @@ const initialCountdown = {
 
   const updateUsernameWithmail = async () => {
     try {
-      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username-by-mail', {
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username', {
         user_mail: userMail,
         new_username: usernameText
       });
       setFindUserName(true);
-      
+      window.location.reload();
       return response.data;
     } catch (error) {
       console.error('Error:', error);
-      // Hata durumunda bir değer döndürülüyor
+      Store.addNotification({
+        title: "Failed!",
+        message: `Username already exists`,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 10000,
+          onScreen: true
+        }
+      });
       return false;
     }
   };
@@ -132,16 +145,28 @@ const initialCountdown = {
   const updateUsernameWithWallet = async () => {
     try {
       
-      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username-by-wallet', {
-        user_wallet: address,
+      const response = await axios.post('https://qandrlivebackend-jet.vercel.app/update-username', {
+        user_walletAddress: address,
         new_username: usernameText
       });
       setFindUserName(true);
-      
+      window.location.reload();
       return response.data;
     } catch (error) {
       console.error('Error:', error);
-      // Hata durumunda bir değer döndürülüyor
+      Store.addNotification({
+        title: "Failed!",
+        message: `Username already exists`,
+        type: "danger",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 10000,
+          onScreen: true
+        }
+      });
      
       return false;
     }
@@ -271,7 +296,7 @@ const initialCountdown = {
 
             <div style={{ display: 'inline-block', marginBottom: 45 }}>
               {/* || userMail !=="" */}
-              {findUserName  && ((isConnected || userMail !=="")   ? ( 
+              { ((isConnected || userMail !=="" )   ? ( 
                 <>
                 {userMail !== ""? (
                   <div style={{display:''}}>
@@ -291,7 +316,7 @@ const initialCountdown = {
           
                    </div>
                 ) : (
-                 
+                 username!=="" &&(<>
                   <div style={{display:''}}>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
   <FormButton style={{ marginBottom: 15 }} title={"Join Now"} onClick={() => onClick && onClick()} />
@@ -313,11 +338,12 @@ const initialCountdown = {
 </div>
         
                  </div>
-                )
+                 </>
+                ))
                 }
                 
                  
-                 </>) : (
+                 </>) : (username==="" &&(
                       <div>
                         
                        
@@ -326,8 +352,8 @@ const initialCountdown = {
                  <FormButton title={"Login gmail"} onClick={() => logGoogleUser()} />
                  
                  </div>
-                  ))}
-                 {!findUserName && ( 
+                 )))}
+                 {username=="" && (userMail!=="" || isConnected)  && ( 
                   <div>
                   {/* Label */}
                   <TextInput
