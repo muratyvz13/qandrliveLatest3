@@ -49,7 +49,7 @@ export const HomeSlide = () => {
               <Image src={'/img/2x.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={'/img/choose.gif'}/>
+              <Image src={'/img/choose2.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
               <Image src={'/img/Ai.gif'}/>
