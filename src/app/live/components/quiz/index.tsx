@@ -31,9 +31,13 @@ interface QuizProps {
   setFindUserName:React.Dispatch<React.SetStateAction<boolean>>;
   username: string;
   setUsername:React.Dispatch<React.SetStateAction<string>>;
+  championship_trophy: string;
+  top_three_trophy: string;
+  participation_trophy: string;
+  top_ten_trophy: string;
   // Diğer prop tipleri
 }
-export const Quiz: React.FunctionComponent<QuizProps> = ({username,setUsername,findUserName,setFindUserName,userMail,walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime,setUserMail}) => {
+export const Quiz: React.FunctionComponent<QuizProps> = ({championship_trophy,top_three_trophy,participation_trophy,top_ten_trophy,username,setUsername,findUserName,setFindUserName,userMail,walletAddress,countDown,waiting,currentQuestion,trueAnswer,userAnswer,options,gameOver,quizName,totalQuestionNumber,currentQuestionIndex,optionsCounts,sortedUsers, setClickedIndexState,setUserAnswer,setUserAnswerTime,setUserMail}) => {
 
   const sponsorImage = {
     src: `/img/sponsor-2.png`,
@@ -138,6 +142,10 @@ export const Quiz: React.FunctionComponent<QuizProps> = ({username,setUsername,f
                 username={username}
                 setUsername={setUsername}
                 userMail={userMail}
+                championship_trophy={championship_trophy}
+                top_three_trophy={top_three_trophy} 
+                participation_trophy={participation_trophy} 
+                top_ten_trophy={top_ten_trophy}
               />
             }
 

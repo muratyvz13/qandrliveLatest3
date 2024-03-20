@@ -40,19 +40,19 @@ export const HomeSlide = () => {
             onSlideChange={(item:any) => setActiveIndex(item.activeIndex)}
           >
             <SwiperSlide>
-              <Image src={'/img/slide-1.jpeg'}/>
+              <Image src={'/img/Elli.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={'/img/slide-2.jpeg'}/>
+              <Image src={'/img/Joker.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={'/img/slide-3.jpeg'}/>
+              <Image src={'/img/2x.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={'/img/slide-4.jpeg'}/>
+              <Image src={'/img/choose.gif'}/>
             </SwiperSlide>
             <SwiperSlide>
-              <Image src={'/img/slide-5.jpeg'}/>
+              <Image src={'/img/Ai.gif'}/>
             </SwiperSlide>
           </Swiper>
 

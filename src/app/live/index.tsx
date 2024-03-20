@@ -26,6 +26,10 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   const [walletAddress,setWalletAddress]=useState("");
   const [username, setUsername] = useState("");
+  const [championship_trophy, setChampionship_trophy] = useState("");
+  const [participation_trophy, setParticipation_trophy] = useState("");
+  const [top_ten_trophy, setTop_ten_trophy] = useState("");
+  const [top_three_trophy, setTop_three_trophy] = useState("");
   const [question, setQuestion] = useState("");
   const [quizName, setQuizName] = useState("Lussa Live Quiz");
   const [options, setOptions] = useState(["1", "2", "3", "4"]);
@@ -127,6 +131,12 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       // Burada bir değer döndürülüyor olmalı
       
       setUsername(response.data.user_username);
+      setChampionship_trophy(response.data.user_championship_trophy);
+      
+      setParticipation_trophy(response.data.user_participation_trophy);
+      setTop_ten_trophy( response.data.user_top_ten_trophy);
+      setTop_three_trophy(response.data.user_top_three_trophy);
+     
       
       return response.data.user_username;
     } catch (error) {
@@ -475,8 +485,13 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
 
 
 
-    <Quiz  username={username} setUsername={setUsername} findUserName={findUserName} setFindUserName={setFindUserName} setUserMail={setUserMail} userMail={userMail} walletAddress={walletAddress}  setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
-
+    <Quiz   championship_trophy={championship_trophy}
+  top_three_trophy={top_three_trophy}
+  participation_trophy={participation_trophy}
+  top_ten_trophy={top_ten_trophy} username={username} setUsername={setUsername} findUserName={findUserName} setFindUserName={setFindUserName} setUserMail={setUserMail} userMail={userMail} walletAddress={walletAddress}  setClickedIndexState={setClickedIndexState}  setUserAnswerTime={setUserAnswerTime} setUserAnswer={setUserAnswer} countDown={countDown} waiting={isWaiting} currentQuestion={question} trueAnswer={trueAnswer} userAnswer={userAnswer} options={options} gameOver={isGameOver} quizName={quizName} totalQuestionNumber={totalQuestionNumber} currentQuestionIndex={currentQuestionIndex} optionsCounts={optionsCounts} sortedUsers={sortedUsers} />
+    
+  
+  
     <Reward/>
     
     <Container size={"xl"}>

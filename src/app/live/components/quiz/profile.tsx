@@ -12,6 +12,10 @@ interface Props {
   userMail?:string | undefined;
   username: string;
   setUsername:React.Dispatch<React.SetStateAction<string>>;
+  championship_trophy: string;
+  top_three_trophy: string;
+  participation_trophy: string;
+  top_ten_trophy: string;
 }
 
 interface QuizHistory {
@@ -25,7 +29,7 @@ interface QuizHistory {
     // quiz ile ilgili diğer özellikler de buraya eklenebilir
   };
 }
-export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) => {
+export const QuizProfile = ({ championship_trophy,top_three_trophy,participation_trophy,top_ten_trophy,username,setUsername,onClick,userMail }: Props) => {
   const { open } = useWeb3Modal()
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   
@@ -318,12 +322,14 @@ export const QuizProfile = ({ username,setUsername,onClick,userMail }: Props) =>
                   <Image src={'/img/stats.png'} width={8.736} height={13.636} fit={"contain"}/>
                </Group>
               <Group spacing={5} mt={13}>
+             
                 {stats.map((item,index) => (
                   <div className={"stat-view"} style={index === 2 ? {backgroundColor:'rgba(223, 255, 103, 0.50)'} : {}}>
                     <Text style={{flex:1}} fz={10} color={"#000"} fw={700} lh={"10px"} lts={-0.3} className={"grotesk-bold"}>{item.count}</Text>
                     <Image fit={"contain"} {...item.img}/>
                   </div>
                 ))}
+                
               </Group>
 
              </div>
