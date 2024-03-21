@@ -132,11 +132,10 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       
       setUsername(response.data.user_username);
       setChampionship_trophy(response.data.user_championship_trophy);
-      
       setParticipation_trophy(response.data.user_participation_trophy);
-      setTop_ten_trophy( response.data.user_top_ten_trophy);
+      setTop_ten_trophy(response.data.user_top_ten_trophy);
       setTop_three_trophy(response.data.user_top_three_trophy);
-     
+      
       
       return response.data.user_username;
     } catch (error) {
@@ -156,7 +155,12 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
       // Burada bir değer döndürülüyor olmalı
      
       setUsername(response.data.user_username);
-      
+      setChampionship_trophy(response.data.user_championship_trophy);
+      setParticipation_trophy(response.data.user_participation_trophy);
+      setTop_ten_trophy(response.data.user_top_ten_trophy);
+      setTop_three_trophy(response.data.user_top_three_trophy);
+    
+      console.log(response.data);
       return response.data.user_username;
     } catch (error) {
       console.error('Error:', error);

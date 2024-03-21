@@ -39,7 +39,7 @@ export const QuizProfile = ({ championship_trophy,top_three_trophy,participation
   const [stats,setStats] = useState([
     {
       id:1,
-      count:340,
+      count:championship_trophy,
       img:{
         width: 15.625,
         height: 17.5,
@@ -48,7 +48,7 @@ export const QuizProfile = ({ championship_trophy,top_three_trophy,participation
     },
     {
       id:2,
-      count:32,
+      count:top_three_trophy,
       img:{
         width: 16.385,
         height: 16.385,
@@ -57,7 +57,16 @@ export const QuizProfile = ({ championship_trophy,top_three_trophy,participation
     },
     {
       id:3,
-      count:54,
+      count:participation_trophy,
+      img:{
+        width: 15.823,
+        height: 15.824,
+        src:'/img/medalha.png'
+      }
+    },
+    {
+      id:4,
+      count:top_ten_trophy,
       img:{
         width: 15.823,
         height: 15.824,
