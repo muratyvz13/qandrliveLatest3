@@ -34,7 +34,7 @@ export const QuizProfile = ({ championship_trophy,top_three_trophy,participation
   const { address, chainId, isConnected } = useWeb3ModalAccount()
   
   const [userId, setUserId] = useState("0");
-  const [usernameText, setUsernameText] = useState("0");
+  const [usernameText, setUsernameText] = useState(username);
   const [changeUsernames, setChangeUsernames] = useState(0);
   const [stats,setStats] = useState([
     {
