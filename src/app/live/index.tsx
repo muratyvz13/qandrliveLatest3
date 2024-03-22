@@ -31,7 +31,7 @@ export const Live: React.FunctionComponent<LiveProps> = ({ }) => {
   const [top_ten_trophy, setTop_ten_trophy] = useState("");
   const [top_three_trophy, setTop_three_trophy] = useState("");
   const [question, setQuestion] = useState("");
-  const [quizName, setQuizName] = useState("Exola Live Quiz");
+  const [quizName, setQuizName] = useState("Exolo Live Quiz");
   const [options, setOptions] = useState(["1", "2", "3", "4"]);
   const [trueAnswer, setTrueAnswer] = useState("");
   const [userAnswer, setUserAnswer] = useState(""); 
