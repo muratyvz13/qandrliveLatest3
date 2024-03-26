@@ -15,6 +15,7 @@ import { add } from 'lodash';
 import { TextInput } from '@mantine/core';
 import { isAddress } from 'ethers/lib/utils';
 import { Store } from 'react-notifications-component';
+import { usePlenaWallet } from "plena-connect-dapp-sdk";
 interface Props {
   onClick: () => void;
   quizName: string; // countDown prop'u eklendi
@@ -56,7 +57,7 @@ function calculateTimeDifference(now: Date, targetDate: Date): { hours: number, 
 
   return { hours, minutes, seconds };
 }
-
+const { openModal, closeConnection, sendTransaction, walletAddress } = usePlenaWallet();
 const now: Date = new Date();
 
 // Aynı günün 20:00'ine ayarlanmış tarih ve saat
@@ -350,7 +351,8 @@ const initialCountdown = {
                         
                  <FormButton title={"Connect Wallet"} onClick={() => open()} />
                  <FormButton title={"Login gmail"} onClick={() => logGoogleUser()} />
-                 
+                 <FormButton title={"Connect Plena wallet"} onClick={() => openModal()} />
+                
                  </div>
                  )))}
                  {username=="" && (userMail!=="" || isConnected)  && ( 
