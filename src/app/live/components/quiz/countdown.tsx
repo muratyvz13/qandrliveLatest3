@@ -198,6 +198,13 @@ const initialCountdown = {
       //checkUsername();
     }
   }, [userMail]);
+  useEffect(() => {
+    if(walletAddress !== "" && walletAddress !==null)
+    {
+      alert("your wallet adress"+walletAddress);
+    }
+  }, [walletAddress]);
+  
 
   useEffect(() => {
     setQuizNameState(quizName);
