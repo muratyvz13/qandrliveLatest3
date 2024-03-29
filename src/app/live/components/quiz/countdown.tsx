@@ -358,8 +358,7 @@ const initialCountdown = {
                         
                  <FormButton title={"Connect Wallet"} onClick={() => open()} />
                  <FormButton title={"Login gmail"} onClick={() => logGoogleUser()} />
-                 <FormButton title={"Connect Plena wallet"} onClick={() => openModal()} />
-                
+                 
                  </div>
                  )))}
                  {username=="" && (userMail!=="" || isConnected)  && ( 
